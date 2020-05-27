@@ -1,0 +1,62 @@
+include: package:pedantic/analysis_options.1.8.0.yaml
+
+analyzer:
+  exclude: [build/**, "**/*.g.dart"]
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+
+linter:
+  rules:
+    - camel_case_types
+    - avoid_empty_else
+    - avoid_relative_lib_imports
+    - avoid_returning_null_for_future
+    - empty_statements
+    - iterable_contains_unrelated_type
+    - prefer_void_to_null
+    - unnecessary_statements
+    - valid_regexps
+    - always_declare_return_types
+    - annotate_overrides
+    - avoid_as
+    - avoid_init_to_null
+    - avoid_returning_null
+    - avoid_returning_null_for_void
+    - empty_catches
+    - flutter_style_todos
+    - unnecessary_await_in_return
+    - unawaited_futures
+    - unnecessary_lambdas
+    - unnecessary_new
+    - unnecessary_overrides
+    - unnecessary_parenthesis
+    - unnecessary_this
+    - sort_pub_dependencies
+    - constant_identifier_names
+    - library_names
+    - file_names
+    - library_prefixes
+    - non_constant_identifier_names
+    - directives_ordering
+    - curly_braces_in_flow_control_structures
+    - prefer_adjacent_string_concatenation
+    - prefer_interpolation_to_compose_strings
+    - prefer_collection_literals
+    - avoid_function_literals_in_foreach_calls
+    - prefer_equal_for_default_values
+    - unnecessary_getters_setters
+    - prefer_initializing_formals
+    - type_init_formals
+    - empty_constructor_bodies
+    - unnecessary_const
+    - use_rethrow_when_possible
+    - use_to_and_as_if_applicable
+    - avoid_classes_with_only_static_members
+    - prefer_final_fields
+    - avoid_returning_this
+    - omit_local_variable_types
+    - prefer_generic_function_type_aliases
+    - avoid_private_typedef_functions
+    - use_function_type_syntax_for_parameters
+    - avoid_positional_boolean_parameters
