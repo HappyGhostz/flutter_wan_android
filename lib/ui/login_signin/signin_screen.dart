@@ -40,7 +40,7 @@ class SignInScreen extends StatelessWidget {
                       const SizedBox(height: 16.0),
                       _buildConfirmPassword(viewModule),
                       const Spacer(),
-                      _buildLoginButton(viewModule),
+                      _buildLoginButton(viewModule, context),
                       const SizedBox(height: 16.0),
                       _buildGoLoginWidget(viewModule),
                     ],
@@ -105,24 +105,29 @@ class SignInScreen extends StatelessWidget {
   }
 
   Widget _buildPassword(LoginModuleView viewModule) {
+    var color = viewModule.editConfirmSignInPasswordFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild;
     return Container(
       padding: const EdgeInsets.only(top: 0.0, left: 16.0, right: 16.0),
       child: Column(
         children: <Widget>[
           AppBassTextField.password(
             isShowPassword: viewModule.isShowPassword,
-            controller: viewModule.controllerPassWord,
-            focusNode: viewModule.editPasswordFocusNode,
-            prefixIconColor: viewModule.editPasswordFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild,
-            suffixIconColor: AppColors.white,
+            controller: viewModule.controllerSignInPassWord,
+            focusNode: viewModule.editConfirmSignInPasswordFocusNode,
+            prefixIconColor: color,
+            suffixIconColor: color,
             hintText: '密码',
             hintTextStyle: AppTextStyle.body2(color: AppColors.greyLightMild),
             labelText: '密码',
-            textStyle: AppTextStyle.body2(color: AppColors.white),
-            textInputAction: TextInputAction.done,
+            textStyle: AppTextStyle.body2(color: color),
+            textInputAction: TextInputAction.next,
             primaryColor: AppColors.white,
-            onChanged: (value) {},
-            showPasswordCallback: () {},
+            onSubmitted: (String value) {
+              viewModule.editConfirmPasswordFocusNode.requestFocus();
+            },
+            showPasswordCallback: () {
+              viewModule.changeThePasswordShowStatus();
+            },
           ),
         ],
       ),
@@ -130,26 +135,30 @@ class SignInScreen extends StatelessWidget {
   }
 
   Widget _buildUserName(LoginModuleView viewModule) {
+    var userColor = viewModule.usernameSignInFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild;
     return Padding(
       key: const Key('usernameTextField'),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: AppBassTextField.userName(
-        focusNode: viewModule.usernameFocusNode,
+        focusNode: viewModule.usernameSignInFocusNode,
         errorTextStyle: AppTextStyle.caption(color: AppColors.warning),
-        controller: viewModule.controllerUsername,
+        controller: viewModule.controllerSignInUsername,
         primaryColor: AppColors.white,
-        prefixIconColor: viewModule.usernameFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild,
-        hintText: '请输入昵称',
+        prefixIconColor: userColor,
+        hintText: '请输入账号',
         hintTextStyle: AppTextStyle.body2(color: AppColors.greyLightMild),
-        textStyle: AppTextStyle.body2(color: AppColors.white),
+        textStyle: AppTextStyle.body2(color: userColor),
         textInputAction: TextInputAction.next,
-        labelText: '昵称',
-        onChanged: (value) {},
+        labelText: '账号',
+        onSubmitted: (String value) {
+          viewModule.editConfirmSignInPasswordFocusNode.requestFocus();
+        },
       ),
     );
   }
 
   Widget _buildConfirmPassword(LoginModuleView viewModule) {
+    var confirmColor = viewModule.editConfirmPasswordFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild;
     return Container(
       padding: const EdgeInsets.only(top: 0.0, left: 16.0, right: 16.0),
       child: Column(
@@ -158,28 +167,41 @@ class SignInScreen extends StatelessWidget {
             isShowPassword: viewModule.isShowPassword,
             controller: viewModule.controllerConfirmPassWord,
             focusNode: viewModule.editConfirmPasswordFocusNode,
-            prefixIconColor: viewModule.editConfirmPasswordFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild,
-            suffixIconColor: AppColors.white,
+            prefixIconColor: confirmColor,
+            suffixIconColor: confirmColor,
             hintText: '确认密码',
             hintTextStyle: AppTextStyle.body2(color: AppColors.greyLightMild),
             labelText: '确认密码',
-            textStyle: AppTextStyle.body2(color: AppColors.white),
+            textStyle: AppTextStyle.body2(color: confirmColor),
             textInputAction: TextInputAction.done,
             primaryColor: AppColors.white,
-            onChanged: (value) {},
-            showPasswordCallback: () {},
+            errorText: viewModule.confirmPasswordIsError ? '密码错误' : null,
+            onChanged: (value) {
+              viewModule.isShowErrorInfo(viewModule.controllerSignInPassWord.text != value);
+            },
+            showPasswordCallback: () {
+              viewModule.changeThePasswordShowStatus();
+            },
           ),
         ],
       ),
     );
   }
 
-  Widget _buildLoginButton(LoginModuleView viewModule) {
+  Widget _buildLoginButton(LoginModuleView viewModule, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: AppButton(
         text: '注册',
-        onPressed: viewModule.controllerConfirmPassWord.text.isNotEmpty ? () {} : null,
+        onPressed: viewModule.controllerConfirmPassWord.text.isNotEmpty
+            ? () {
+                viewModule.usernameSignInFocusNode.unfocus();
+                viewModule.editConfirmSignInPasswordFocusNode.unfocus();
+                viewModule.editConfirmPasswordFocusNode.unfocus();
+                viewModule.signIn(context, viewModule.controllerSignInUsername.text, viewModule.controllerSignInPassWord.text,
+                    viewModule.controllerConfirmPassWord.text);
+              }
+            : null,
       ),
     );
   }

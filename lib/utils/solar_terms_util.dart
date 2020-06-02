@@ -153,61 +153,85 @@ class SolarTermsUtil {
       case 2:
         if (day >= getSolarTermNum(year, SolarTermsEnum.YUSHUI)) {
           return SolarTermsEnum.YUSHUI;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.LICHUN)) {
+          return SolarTermsEnum.DAHAN;
         }
         return SolarTermsEnum.LICHUN;
       case 3:
         if (day >= getSolarTermNum(year, SolarTermsEnum.CHUNFEN)) {
           return SolarTermsEnum.CHUNFEN;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.JINGZHE)) {
+          return SolarTermsEnum.YUSHUI;
         }
         return SolarTermsEnum.JINGZHE;
       case 4:
         if (day >= getSolarTermNum(year, SolarTermsEnum.GUYU)) {
           return SolarTermsEnum.GUYU;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.QINGMING)) {
+          return SolarTermsEnum.CHUNFEN;
         }
         return SolarTermsEnum.QINGMING;
       case 5:
         if (day >= getSolarTermNum(year, SolarTermsEnum.XIAOMAN)) {
           return SolarTermsEnum.XIAOMAN;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.LIXIA)) {
+          return SolarTermsEnum.GUYU;
         }
         return SolarTermsEnum.LIXIA;
       case 6:
         if (day >= getSolarTermNum(year, SolarTermsEnum.XIAZHI)) {
           return SolarTermsEnum.XIAZHI;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.MANGZHONG)) {
+          return SolarTermsEnum.XIAOMAN;
         }
         return SolarTermsEnum.MANGZHONG;
       case 7:
         if (day >= getSolarTermNum(year, SolarTermsEnum.DASHU)) {
           return SolarTermsEnum.DASHU;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.XIAOSHU)) {
+          return SolarTermsEnum.XIAZHI;
         }
         return SolarTermsEnum.XIAOSHU;
       case 8:
         if (day >= getSolarTermNum(year, SolarTermsEnum.CHUSHU)) {
           return SolarTermsEnum.CHUSHU;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.LIQIU)) {
+          return SolarTermsEnum.DASHU;
         }
         return SolarTermsEnum.LIQIU;
       case 9:
         if (day >= getSolarTermNum(year, SolarTermsEnum.QIUFEN)) {
           return SolarTermsEnum.QIUFEN;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.BAILU)) {
+          return SolarTermsEnum.CHUSHU;
         }
         return SolarTermsEnum.BAILU;
       case 10:
         if (day >= getSolarTermNum(year, SolarTermsEnum.SHUANGJIANG)) {
           return SolarTermsEnum.SHUANGJIANG;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.HANLU)) {
+          return SolarTermsEnum.QIUFEN;
         }
         return SolarTermsEnum.HANLU;
       case 11:
         if (day >= getSolarTermNum(year, SolarTermsEnum.XIAOXUE)) {
           return SolarTermsEnum.XIAOXUE;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.LIDONG)) {
+          return SolarTermsEnum.SHUANGJIANG;
         }
         return SolarTermsEnum.LIDONG;
       case 12:
         if (day >= getSolarTermNum(year, SolarTermsEnum.DONGZHI)) {
           return SolarTermsEnum.DONGZHI;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.DAXUE)) {
+          return SolarTermsEnum.XIAOXUE;
         }
         return SolarTermsEnum.DAXUE;
       case 1:
         if (day >= getSolarTermNum(year, SolarTermsEnum.DAHAN)) {
           return SolarTermsEnum.DAHAN;
+        } else if (day < getSolarTermNum(year, SolarTermsEnum.XIAOHAN)) {
+          return SolarTermsEnum.DONGZHI;
         }
         return SolarTermsEnum.XIAOHAN;
       default:

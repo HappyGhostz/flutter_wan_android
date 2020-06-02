@@ -19,7 +19,7 @@ linter:
     - valid_regexps
     - always_declare_return_types
     - annotate_overrides
-    - avoid_as
+#    - avoid_as
     - avoid_init_to_null
     - avoid_returning_null
     - avoid_returning_null_for_void

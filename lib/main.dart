@@ -5,8 +5,9 @@ import 'package:flutterwanandroid/build_app.dart';
 import 'package:pedantic/pedantic.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   FlutterError.onError = reportFlutterError;
-  var app = buildAppWidget();
+  var app = await buildAppWidget();
   unawaited(runZonedGuarded<Future<void>>(
     () async {
       runApp(app);

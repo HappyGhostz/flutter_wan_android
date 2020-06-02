@@ -8,6 +8,8 @@ class AppButton extends StatelessWidget {
     Key key,
     @required this.text,
     @required this.onPressed,
+    this.textStyle,
+    this.buttonColor,
     this.type = AppButtonType.primary,
   })  : assert(text != null),
         super(key: key);
@@ -15,6 +17,8 @@ class AppButton extends StatelessWidget {
   final String text;
   final Function() onPressed;
   final AppButtonType type;
+  final TextStyle textStyle;
+  final Color buttonColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +30,21 @@ class AppButton extends StatelessWidget {
         side: type == AppButtonType.secondary ? const BorderSide(color: AppColors.grey) : BorderSide.none,
       ),
       disabledColor: AppColors.lightGrey2,
-      color: type == AppButtonType.secondary ? AppColors.white : AppColors.primary,
+      color: type == AppButtonType.secondary ? AppColors.white : buttonColor ?? AppColors.primary,
       onPressed: onPressed,
       child: Text(
         text,
-        style: TextStyle(
-          color: () {
-            if (type == AppButtonType.secondary) {
-              return AppColors.grey;
-            }
-            return onPressed == null ? AppColors.lightGrey1 : AppColors.white;
-          }(),
-          fontSize: 16.0,
-          fontWeight: FontWeight.w600,
-        ),
+        style: textStyle ??
+            TextStyle(
+              color: () {
+                if (type == AppButtonType.secondary) {
+                  return AppColors.grey;
+                }
+                return onPressed == null ? AppColors.lightGrey1 : AppColors.white;
+              }(),
+              fontSize: 16.0,
+              fontWeight: FontWeight.w600,
+            ),
       ),
     );
   }

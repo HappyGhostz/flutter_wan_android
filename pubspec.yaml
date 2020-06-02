@@ -28,7 +28,10 @@ dependencies:
   flutter_redux: ^0.6.0
   redux_thunk: ^0.3.0
   dio: ^3.0.9
+  cookie_jar: ^1.0.1
+  dio_cookie_manager: ^1.0.0
   shared_preferences: ^0.5.7+3
+  path_provider: ^1.6.9
   equatable: ^1.1.1
   animations: ^1.0.0+5
 

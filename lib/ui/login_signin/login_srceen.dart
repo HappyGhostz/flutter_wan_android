@@ -38,9 +38,9 @@ class LoginScreen extends StatelessWidget {
                       _buildUserName(viewModule),
                       const SizedBox(height: 16.0),
                       _buildPassword(viewModule),
-                      _buildRememberAndComeBackPassword(),
+                      _buildRememberAndComeBackPassword(viewModule, context),
                       const Spacer(),
-                      _buildLoginButton(viewModule),
+                      _buildLoginButton(viewModule, context),
                       const SizedBox(height: 16.0),
                       _buildGoSignInWidget(viewModule),
                     ],
@@ -105,6 +105,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildPassword(LoginModuleView viewModule) {
+    var passwordColor = viewModule.editPasswordFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild;
     return Container(
       padding: const EdgeInsets.only(top: 0.0, left: 16.0, right: 16.0),
       child: Column(
@@ -113,16 +114,18 @@ class LoginScreen extends StatelessWidget {
             isShowPassword: viewModule.isShowPassword,
             controller: viewModule.controllerPassWord,
             focusNode: viewModule.editPasswordFocusNode,
-            prefixIconColor: viewModule.editPasswordFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild,
-            suffixIconColor: AppColors.white,
+            prefixIconColor: passwordColor,
+            suffixIconColor: passwordColor,
             hintText: '密码',
             hintTextStyle: AppTextStyle.body2(color: AppColors.greyLightMild),
             labelText: '密码',
-            textStyle: AppTextStyle.body2(color: AppColors.white),
+            textStyle: AppTextStyle.body2(color: passwordColor),
             textInputAction: TextInputAction.done,
             primaryColor: AppColors.white,
             onChanged: (value) {},
-            showPasswordCallback: () {},
+            showPasswordCallback: () {
+              viewModule.changeThePasswordShowStatus();
+            },
           ),
         ],
       ),
@@ -130,26 +133,29 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildUserName(LoginModuleView viewModule) {
+    var userColor = viewModule.usernameFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild;
     return Padding(
       key: const Key('usernameTextField'),
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: AppBassTextField.userName(
         focusNode: viewModule.usernameFocusNode,
-        errorTextStyle: AppTextStyle.caption(color: AppColors.warning),
         controller: viewModule.controllerUsername,
         primaryColor: AppColors.white,
-        prefixIconColor: viewModule.usernameFocusNode.hasFocus ? AppColors.white : AppColors.greyLightMild,
+        prefixIconColor: userColor,
         hintText: '请输入昵称',
         hintTextStyle: AppTextStyle.body2(color: AppColors.greyLightMild),
-        textStyle: AppTextStyle.body2(color: AppColors.white),
+        textStyle: AppTextStyle.body2(color: userColor),
         textInputAction: TextInputAction.next,
+        onSubmitted: (value) {
+          viewModule.editPasswordFocusNode.requestFocus();
+        },
         labelText: '昵称',
         onChanged: (value) {},
       ),
     );
   }
 
-  Widget _buildRememberAndComeBackPassword() {
+  Widget _buildRememberAndComeBackPassword(LoginModuleView viewModule, BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
       child: Row(
@@ -160,27 +166,41 @@ class LoginScreen extends StatelessWidget {
               GestureDetector(
                 child: CheckPasswordInfoWidget(
                   info: '记住密码',
-                  initValue: true,
+                  initValue: viewModule.isRememberPassword,
                 ),
-                onTap: () {},
+                onTap: () {
+                  viewModule.changeTheRememberPasswordStatus(!viewModule.isRememberPassword);
+                },
               )
             ],
           ),
-          Text(
-            '忘记密码',
-            style: AppTextStyle.caption(color: AppColors.black),
+          GestureDetector(
+            child: Text(
+              '忘记密码',
+              style: AppTextStyle.caption(color: AppColors.black),
+            ),
+            onTap: () {
+              viewModule.forgetPassword(context);
+            },
           ),
         ],
       ),
     );
   }
 
-  Widget _buildLoginButton(LoginModuleView viewModule) {
+  Widget _buildLoginButton(LoginModuleView viewModule, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: AppButton(
         text: '登陆',
-        onPressed: viewModule.controllerPassWord.text.isNotEmpty ? () {} : null,
+        onPressed: viewModule.controllerPassWord.text.isNotEmpty
+            ? () {
+                viewModule.editPasswordFocusNode.unfocus();
+                viewModule.usernameFocusNode.unfocus();
+                viewModule.login(
+                    context, viewModule.controllerUsername.text, viewModule.controllerPassWord.text, viewModule.isRememberPassword);
+              }
+            : null,
       ),
     );
   }

@@ -97,14 +97,12 @@ class AppBassTextField extends StatelessWidget {
               OutlineInputBorder(borderRadius: BorderRadius.circular(8.0), borderSide: BorderSide(color: AppColors.warning, width: 1.0)),
           errorBorder:
               OutlineInputBorder(borderRadius: BorderRadius.circular(8.0), borderSide: BorderSide(color: AppColors.warning, width: 1.0)),
-          suffixIcon: focusNode.hasFocus
-              ? IconButton(
-                  icon: Icon(
-                    isShowPassword ? Icons.visibility : Icons.visibility_off,
-                    color: suffixIconColor ?? AppColors.primary,
-                  ),
-                  onPressed: showPasswordCallback == null ? () {} : showPasswordCallback)
-              : null,
+          suffixIcon: IconButton(
+              icon: Icon(
+                isShowPassword ? Icons.visibility : Icons.visibility_off,
+                color: suffixIconColor ?? AppColors.primary,
+              ),
+              onPressed: showPasswordCallback == null ? () {} : showPasswordCallback),
         ),
         textInputType = TextInputType.text,
         obscureText = isShowPassword,

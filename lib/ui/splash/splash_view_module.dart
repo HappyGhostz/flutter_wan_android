@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutterwanandroid/app_redux/app_action.dart';
-import 'package:flutterwanandroid/app_state.dart';
+import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_action.dart';
 import 'package:flutterwanandroid/utils/solar_terms_util.dart';
 import 'package:flutterwanandroid/utils/splash_img_choose_util.dart';

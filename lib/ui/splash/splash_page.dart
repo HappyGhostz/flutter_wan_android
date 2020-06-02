@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/app_router.dart';
-import 'package:flutterwanandroid/app_state.dart';
 import 'package:flutterwanandroid/custom_widget/photo_hero.dart';
 import 'package:flutterwanandroid/custom_widget/vertival_text.dart';
+import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/style/app_text_style.dart';
 import 'package:flutterwanandroid/ui/splash/splash_view_module.dart';
 import 'package:flutterwanandroid/utils/router_utils.dart';
@@ -93,6 +94,12 @@ class SplashPage extends StatelessWidget {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top, SystemUiOverlay.bottom]);
     var systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-    RouterUtil.pushNameAndRemove(context, AppRouter.loginRouterName);
+    var store = StoreProvider.of<AppState>(context);
+    var cookies = store.state.cookJar.loadForRequest(Uri.parse('${NetPath.APP_BASE_URL}${NetPath.LOG_IN}'));
+    if (cookies != null && cookies.isNotEmpty) {
+      RouterUtil.pushNameAndRemove(context, AppRouter.homeRouterName);
+    } else {
+      RouterUtil.pushNameAndRemove(context, AppRouter.loginRouterName);
+    }
   }
 }
