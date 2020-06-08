@@ -8,6 +8,10 @@ class AppHttpResponseAction {
   BaseResponse baseResponse;
 }
 
+class AppResponseErrorAction {
+  BaseResponse baseResponse;
+}
+
 class UpdateSplashImgAction extends AppAction {
   UpdateSplashImgAction({this.img, this.famousSentence});
 
@@ -48,6 +52,7 @@ class HttpAction {
   BuildContext context;
   String error;
   AppHttpResponseAction action;
+  AppResponseErrorAction errorAction;
 //  ThunkAction<AppState> customThunkAction;
 
   HttpAction({
@@ -56,6 +61,7 @@ class HttpAction {
     this.context,
     this.dioError,
     this.action,
+    this.errorAction,
 //    this.customThunkAction,
   });
 }

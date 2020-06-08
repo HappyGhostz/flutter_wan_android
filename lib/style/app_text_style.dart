@@ -56,6 +56,14 @@ class AppTextStyle {
       );
 
   static TextStyle body(
+          {double fontSize = _fontSizeLarge,
+          Color color = AppColors.black,
+          FontWeight fontWeight = _mediumWeight,
+          String fontFamily,
+          FontStyle fontStyle = FontStyle.normal}) =>
+      _body1(fontSize: fontSize, color: color, fontWeight: fontWeight, fontFamily: fontFamily, fontStyle: fontStyle);
+
+  static TextStyle head(
           {double fontSize = _fontSizeRegular,
           Color color = AppColors.lightGrey1,
           FontWeight fontWeight = _mediumWeight,
@@ -67,8 +75,16 @@ class AppTextStyle {
     return _body1(fontSize: _fontSizeLarge, color: AppColors.black, fontWeight: _mediumWeight, fontFamily: 'Lishu');
   }
 
-  static TextStyle caption({Color color = AppColors.black, TextDecoration decoration}) =>
-      TextStyle(fontWeight: _regularWeight, fontSize: _fontSizeExtraSmall, color: color, decoration: decoration ?? TextDecoration.none);
+  static TextStyle caption({
+    Color color = AppColors.black,
+    TextDecoration decoration,
+    double fontSize,
+  }) =>
+      TextStyle(
+          fontWeight: _regularWeight,
+          fontSize: fontSize ?? _fontSizeExtraSmall,
+          color: color,
+          decoration: decoration ?? TextDecoration.none);
 
   static TextStyle body2({Color color = AppColors.black}) => TextStyle(fontWeight: _regularWeight, fontSize: _fontSizeSmall, color: color);
 }

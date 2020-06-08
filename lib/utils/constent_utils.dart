@@ -11,3 +11,10 @@ var dioErrorValue = <DioErrorType, String>{
   DioErrorType.RESPONSE: '服务器404!',
   DioErrorType.SEND_TIMEOUT: '数据传输超时!',
 };
+
+enum DataLoadStatus {
+  loading,
+  loadCompleted,
+  failure,
+  empty,
+}

@@ -8,8 +8,11 @@ import 'package:flutterwanandroid/app_redux/app_reducer.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/app_router.dart';
 import 'package:flutterwanandroid/custom_middleware/http_middleware.dart';
+import 'package:flutterwanandroid/custom_page_route/slide_route.dart';
 import 'package:flutterwanandroid/style/app_theme.dart';
+import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/home_page.dart';
+import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
 import 'package:flutterwanandroid/ui/login_signin/log_in_page.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_page.dart';
@@ -40,9 +43,10 @@ Future<Widget> buildAppWidget() async {
                 return LoginPage();
               });
             case AppRouter.homeRouterName:
-              return MaterialPageRoute<void>(builder: (context) {
-                return HomePage();
-              });
+              return SlideRightRoute<void>(page: HomePage());
+//              return MaterialPageRoute<void>(builder: (context) {
+//                return HomePage();
+//              });
             default:
               return MaterialPageRoute<void>(builder: (context) {
                 return SplashPage();
@@ -61,6 +65,8 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
     initialState: AppState(
       splashState: SplashState(),
       loginState: LoginState(),
+      homeState: HomeState(),
+      firstPageState: FirstPageState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

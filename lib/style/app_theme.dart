@@ -3,7 +3,6 @@ import 'package:flutterwanandroid/style/app_colors.dart';
 
 ThemeData appThemeData = ThemeData(
   brightness: Brightness.light,
-//  primaryColor: AppColors.primary60,
   canvasColor: AppColors.lightGrey4,
   highlightColor: Colors.transparent,
   splashColor: Colors.transparent,

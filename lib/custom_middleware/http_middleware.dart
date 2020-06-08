@@ -21,7 +21,11 @@ void httpMiddleware(
         if (baseResponse.errorCode == -1001) {
           store.dispatch(VerificationFailedAction(context: action.context));
         } else if (baseResponse.errorCode != 0) {
-          store.dispatch(ApiErrorAction(errorMessage: baseResponse.errorMsg, context: action.context));
+          if (action.errorAction != null) {
+            store.dispatch(action.errorAction);
+          } else {
+            store.dispatch(ApiErrorAction(errorMessage: baseResponse.errorMsg, context: action.context));
+          }
         } else {
           if (action.action != null) {
             if (action.action is AppHttpResponseAction) {

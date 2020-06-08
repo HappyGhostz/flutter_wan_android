@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterwanandroid/app_redux/app_action.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/app_router.dart';
+import 'package:flutterwanandroid/ui/frist_page/redux/first_page_reducer.dart';
+import 'package:flutterwanandroid/ui/home/redux/home_reducer.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_reducer.dart';
 import 'package:flutterwanandroid/ui/splash/splash_reducer.dart';
 import 'package:flutterwanandroid/utils/dialog_manager.dart';
@@ -27,5 +29,7 @@ AppState appReducer(AppState state, dynamic action) {
   }
   return state.clone()
     ..splashState = splashReducer(state.splashState, action)
-    ..loginState = loginReducer(state.loginState, action);
+    ..loginState = loginReducer(state.loginState, action)
+    ..homeState = homeReducer(state.homeState, action)
+    ..firstPageState = firstPageReducer(state.firstPageState, action);
 }
