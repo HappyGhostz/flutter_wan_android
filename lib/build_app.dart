@@ -15,6 +15,8 @@ import 'package:flutterwanandroid/ui/home/home_page.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
 import 'package:flutterwanandroid/ui/login_signin/log_in_page.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_state.dart';
+import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_state.dart';
+import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_page.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
 import 'package:path_provider/path_provider.dart';
@@ -67,6 +69,8 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       loginState: LoginState(),
       homeState: HomeState(),
       firstPageState: FirstPageState(),
+      publicAccountPageState: PublicAccountState(),
+      publicAccountHistoryState: PublicAccountHistoryState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

@@ -66,13 +66,17 @@ class HomePage extends StatelessWidget {
           ),
           floatingActionButton: GestureDetector(
             onTap: () {},
-            child: Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
-              child: Icon(
-                Icons.border_color,
-                color: AppColors.white,
+            child: Card(
+              shape: CircleBorder(),
+              elevation: 4,
+              child: Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
+                child: Icon(
+                  Icons.border_color,
+                  color: AppColors.white,
+                ),
               ),
             ),
           ),

@@ -8,6 +8,8 @@ import 'package:flutterwanandroid/type/clone.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_state.dart';
+import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_state.dart';
+import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
 
 class AppState implements Cloneable<AppState> {
@@ -19,6 +21,8 @@ class AppState implements Cloneable<AppState> {
     this.appDependency,
     this.homeState,
     this.firstPageState,
+    this.publicAccountPageState,
+    this.publicAccountHistoryState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -39,6 +43,8 @@ class AppState implements Cloneable<AppState> {
   PersistCookieJar cookJar;
   AppDependency appDependency;
   FirstPageState firstPageState;
+  PublicAccountState publicAccountPageState;
+  PublicAccountHistoryState publicAccountHistoryState;
 
   @override
   AppState clone() {
@@ -47,6 +53,8 @@ class AppState implements Cloneable<AppState> {
       ..loginState = loginState
       ..homeState = homeState
       ..firstPageState = firstPageState
+      ..publicAccountPageState = publicAccountPageState
+      ..publicAccountHistoryState = publicAccountHistoryState
       ..splashImg = splashImg
       ..navigatorKey = navigatorKey
       ..dio = dio

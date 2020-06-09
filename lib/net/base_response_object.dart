@@ -5,13 +5,13 @@ class BaseResponse {
     this.errorMsg,
   });
 
-  Map<String, dynamic> data;
+  dynamic data;
   String errorMsg;
   int errorCode;
 
   factory BaseResponse.fromJson(Map<String, dynamic> srcJson) {
     var baseResponse = BaseResponse();
-    baseResponse.data = srcJson['data'] as Map<String, dynamic>;
+    baseResponse.data = srcJson['data'];
     baseResponse.errorCode = srcJson['errorCode'] as int;
     baseResponse.errorMsg = srcJson['errorMsg'] as String;
     return baseResponse;

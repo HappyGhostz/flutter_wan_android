@@ -108,9 +108,25 @@ ThunkAction<AppState> loadMoreAction(int index, FirstPageModule firstPageModule,
         store.dispatch(LoadMoreFirstDataAction(firstPageModule: firstData, pageOffset: index + 1, isChangePerformingRequestStatus: false));
       });
     } on DioError catch (e) {
-      store.dispatch(ChangePerformingRequestStatusAction(isChangePerformingRequestStatus: false));
+      Future.delayed(const Duration(microseconds: 500), () {
+        var edge = 72;
+        var offsetFromBottom = listController.position.maxScrollExtent - listController.position.pixels;
+        if (offsetFromBottom < edge) {
+          listController.animateTo(listController.offset - (edge - offsetFromBottom),
+              duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+        }
+        store.dispatch(ChangePerformingRequestStatusAction(isChangePerformingRequestStatus: false));
+      });
     } catch (e) {
-      store.dispatch(ChangePerformingRequestStatusAction(isChangePerformingRequestStatus: false));
+      Future.delayed(const Duration(microseconds: 500), () {
+        var edge = 72;
+        var offsetFromBottom = listController.position.maxScrollExtent - listController.position.pixels;
+        if (offsetFromBottom < edge) {
+          listController.animateTo(listController.offset - (edge - offsetFromBottom),
+              duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+        }
+        store.dispatch(ChangePerformingRequestStatusAction(isChangePerformingRequestStatus: false));
+      });
     }
   };
 }

@@ -11,10 +11,12 @@ class ErrorDialog extends StatelessWidget {
     this.dioError,
     this.buttonText,
     this.exception,
+    this.onClick,
   }) : super(key: key);
   final DioError dioError;
   final String buttonText;
   final String exception;
+  final Function() onClick;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,7 @@ class ErrorDialog extends StatelessWidget {
         buttonColor: AppColors.warning,
         text: buttonText ?? 'Got it',
         onPressed: () {
+          onClick();
           Navigator.maybePop(context);
         },
         textStyle: button,

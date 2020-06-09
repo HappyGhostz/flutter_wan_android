@@ -5,6 +5,8 @@ import 'package:flutterwanandroid/app_router.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_reducer.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_reducer.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_reducer.dart';
+import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_reducer.dart';
+import 'package:flutterwanandroid/ui/public_account/redux/public_account_reducer.dart';
 import 'package:flutterwanandroid/ui/splash/splash_reducer.dart';
 import 'package:flutterwanandroid/utils/dialog_manager.dart';
 
@@ -31,5 +33,7 @@ AppState appReducer(AppState state, dynamic action) {
     ..splashState = splashReducer(state.splashState, action)
     ..loginState = loginReducer(state.loginState, action)
     ..homeState = homeReducer(state.homeState, action)
-    ..firstPageState = firstPageReducer(state.firstPageState, action);
+    ..firstPageState = firstPageReducer(state.firstPageState, action)
+    ..publicAccountPageState = publicAccountPageReducer(state.publicAccountPageState, action)
+    ..publicAccountHistoryState = publicAccountHistoryPageReducer(state.publicAccountHistoryState, action);
 }
