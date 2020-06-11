@@ -6,6 +6,7 @@ class NetPath {
   static const LOG_IN = '/user/login';
   static const BANNER = '/banner/json';
   static const TOP_ARTICLE = '/article/top/json';
+  static const NAVIGATION = '/navi/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';
