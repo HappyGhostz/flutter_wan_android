@@ -10,6 +10,7 @@ final firstPageReducer = combineReducers<FirstPageState>([
   TypedReducer<FirstPageState, ChangeNameViewColorAction>(_changeNameViewColorReducer),
   TypedReducer<FirstPageState, ChangeTagViewColorAction>(_changeTagViewColorReducer),
   TypedReducer<FirstPageState, ChangeTypeViewColorAction>(_changeTypeViewColorReducer),
+  TypedReducer<FirstPageState, UpdateCollectsDataAction>(_updateCollectsDataActionReducer),
 ]);
 
 FirstPageState _changePageStatusReducer(FirstPageState state, ChangePageStatusAction action) {
@@ -46,4 +47,13 @@ FirstPageState _changeTagViewColorReducer(FirstPageState state, ChangeTagViewCol
 
 FirstPageState _changeTypeViewColorReducer(FirstPageState state, ChangeTypeViewColorAction action) {
   return state.clone()..tabBackgroundTypeColor = action.changeColor;
+}
+
+FirstPageState _updateCollectsDataActionReducer(FirstPageState state, UpdateCollectsDataAction action) {
+  if (state.collectIndexs == null) {
+    return state.clone()..collectIndexs = action.collects;
+  } else {
+    state.collectIndexs.addAll(action.collects);
+    return state.clone();
+  }
 }

@@ -10,6 +10,7 @@ class FirstPageViewModule {
     this.firstPageStatus,
     this.refreshFirstPageData,
     this.isPerformingRequest,
+    this.collectIndexs,
   });
 
   DataLoadStatus firstPageStatus;
@@ -26,11 +27,14 @@ class FirstPageViewModule {
   Color tabBackgroundNameColor;
   Color tabBackgroundTypeColor;
   Color tagTextInfoColor;
+  Map<int, bool> collectIndexs;
+  Function(BuildContext context, bool collect, bool isTopArticle, int indexCount) updateCollectAction;
 
   static FirstPageViewModule fromStore(Store<AppState> store) {
     var firstState = store.state.firstPageState;
     return FirstPageViewModule()
       ..firstPageStatus = firstState.firstPageStatus
+      ..collectIndexs = firstState.collectIndexs
       ..currentIndex = firstState.currentIndex
       ..firstPageModule = firstState.firstPageModule
       ..isPerformingRequest = firstState.isPerformingRequest
@@ -52,6 +56,9 @@ class FirstPageViewModule {
       }
       ..changeTypeColorForTapDown = (changeColor) {
         store.dispatch(ChangeTypeViewColorAction(changeColor: changeColor));
+      }
+      ..updateCollectAction = (context, collect, isTopArticle, indexCount) {
+        store.dispatch(changeTheCollectStatusAction(context, collect: collect, isTopArticle: isTopArticle, indexCount: indexCount));
       };
   }
 }

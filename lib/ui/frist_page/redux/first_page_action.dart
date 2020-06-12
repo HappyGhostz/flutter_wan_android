@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/scroll_controller.dart';
+import 'package:flutterwanandroid/app_redux/app_action.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/module/first_page/fist_page_module.dart';
+import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
@@ -127,6 +129,40 @@ ThunkAction<AppState> loadMoreAction(int index, FirstPageModule firstPageModule,
         }
         store.dispatch(ChangePerformingRequestStatusAction(isChangePerformingRequestStatus: false));
       });
+    }
+  };
+}
+
+class UpdateCollectsDataAction extends AppHttpResponseAction {
+  UpdateCollectsDataAction({
+    this.collects,
+  });
+
+  Map<int, bool> collects;
+}
+
+ThunkAction<AppState> changeTheCollectStatusAction(BuildContext context, {bool collect, bool isTopArticle, int indexCount}) {
+  return (Store<AppState> store) async {
+    try {
+      var id = 0;
+      if (isTopArticle) {
+        id = store.state.firstPageState.firstPageModule.topArticle.data[indexCount].id;
+      } else {
+        id = store.state.firstPageState.firstPageModule.articleModule.data.datas[indexCount].id;
+      }
+      Response response;
+      if (collect) {
+        response = await store.state.dio.post<Map<String, dynamic>>(NetPath.collectArticle(id));
+      } else {
+        response = await store.state.dio.post<Map<String, dynamic>>(NetPath.unCollectArticle(id));
+      }
+      var collects = <int, bool>{};
+      collects[indexCount] = collect;
+      store.dispatch(HttpAction(context: context, response: response, action: UpdateCollectsDataAction(collects: collects)));
+    } on DioError catch (e) {
+      store.dispatch(HttpAction(dioError: e, context: context));
+    } catch (e) {
+      store.dispatch(HttpAction(error: e.toString(), context: context));
     }
   };
 }

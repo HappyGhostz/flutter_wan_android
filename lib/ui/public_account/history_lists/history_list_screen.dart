@@ -62,20 +62,14 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
         publicAccountHistoryStatus = DataLoadStatus.loadCompleted;
         pageOffset = 2;
       }
-      if (!mounted) {
-        setState(() {});
-      }
+      setState(() {});
     } on DioError catch (e) {
       print('PublicAccountHistoryListScreen Dio Error::${e.message}');
       publicAccountHistoryStatus = DataLoadStatus.failure;
-      if (!mounted) {
-        setState(() {});
-      }
+      setState(() {});
     } catch (e) {
       publicAccountHistoryStatus = DataLoadStatus.failure;
-      if (!mounted) {
-        setState(() {});
-      }
+      setState(() {});
     }
   }
 

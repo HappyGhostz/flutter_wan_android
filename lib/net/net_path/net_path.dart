@@ -31,4 +31,13 @@ class NetPath {
   static String getMyShare(int index) {
     return '/user/lg/private_articles/$index/json';
   }
+
+  ///  /lg/collect/1165/json
+  static String collectArticle(int id) {
+    return '/lg/collect/$id/json';
+  }
+
+  static String unCollectArticle(int id) {
+    return '/lg/uncollect_originId/$id/json';
+  }
 }

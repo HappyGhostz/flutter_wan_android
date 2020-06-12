@@ -58,10 +58,10 @@ class FirstPage extends StatelessWidget {
               return _buildLoadMore(context, vm);
             } else if (index <= vm.firstPageModule.topArticle.data.length) {
               var topArticleIndexCount = index - 1;
-              return _buildTopArticle(vm, topArticleIndexCount);
+              return _buildTopArticle(vm, topArticleIndexCount, context);
             } else {
               var articleIndexCount = index - vm.firstPageModule.topArticle.data.length - 1;
-              return _buildArticle(vm, articleIndexCount);
+              return _buildArticle(vm, articleIndexCount, context);
             }
           },
           itemCount: _buildItemCount(vm),
@@ -75,15 +75,22 @@ class FirstPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTopArticle(FirstPageViewModule vm, int topArticleIndexCount) {
+  Widget _buildTopArticle(FirstPageViewModule vm, int topArticleIndexCount, BuildContext context) {
     var topArticleData = vm.firstPageModule.topArticle.data[topArticleIndexCount];
+    var isCurrentCollect = vm.collectIndexs == null ? false : vm.collectIndexs[topArticleIndexCount];
+    var isCollect = false;
+    if (topArticleData.collect != null && topArticleData.collect && vm.collectIndexs == null) {
+      isCollect = topArticleData.collect;
+    } else {
+      isCollect = isCurrentCollect ?? topArticleData.collect ?? false;
+    }
     return Container(
       color: AppColors.white,
       padding: EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildCollectWidget(topArticleData.collect ?? false),
+          _buildCollectWidget(isCollect, vm, true, topArticleIndexCount, context),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,15 +136,17 @@ class FirstPage extends StatelessWidget {
     );
   }
 
-  Widget _buildArticle(FirstPageViewModule vm, int articleIndexCount) {
+  Widget _buildArticle(FirstPageViewModule vm, int articleIndexCount, BuildContext context) {
     var article = vm.firstPageModule.articleModule.data.datas[articleIndexCount];
+    var isCurrentCollect = vm.collectIndexs == null ? false : vm.collectIndexs[articleIndexCount];
+    var isCollect = isCurrentCollect ?? article.collect ?? false;
     return Container(
       color: AppColors.white,
       padding: EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildCollectWidget(article.collect ?? false),
+          _buildCollectWidget(isCollect, vm, false, articleIndexCount, context),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,13 +183,15 @@ class FirstPage extends StatelessWidget {
     );
   }
 
-  IconButton _buildCollectWidget(bool collect) {
+  IconButton _buildCollectWidget(bool collect, FirstPageViewModule vm, bool isTopArticle, int indexCount, BuildContext context) {
     return IconButton(
         icon: Icon(
           collect ? Icons.favorite : Icons.favorite_border,
           color: Colors.red,
         ),
-        onPressed: () {});
+        onPressed: () {
+          vm.updateCollectAction(context, !collect, isTopArticle, indexCount);
+        });
   }
 
   int _buildItemCount(FirstPageViewModule vm) {

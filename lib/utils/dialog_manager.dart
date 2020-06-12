@@ -9,7 +9,7 @@ void showDioErrorInfo(BuildContext context, DioError dioError, {Function() onCli
       context: context,
       child: ErrorDialog(
         dioError: dioError,
-        onClick: onClick,
+        onClick: onClick ?? () {},
       ));
 }
 
@@ -18,7 +18,7 @@ void showExceptionInfo(BuildContext context, String exception, {Function() onCli
       context: context,
       child: ErrorDialog(
         exception: exception,
-        onClick: onClick,
+        onClick: onClick ?? () {},
       ));
 }
 
@@ -27,7 +27,7 @@ void showApiError(BuildContext context, String exception, {Function() onClick}) 
       context: context,
       child: ErrorDialog(
         exception: exception,
-        onClick: onClick,
+        onClick: onClick ?? () {},
       ));
 }
 
@@ -36,6 +36,6 @@ void showInfoDialog(BuildContext context, String content, Function() onClick) {
       context: context,
       child: InfoDialog(
         content: content,
-        onClick: onClick,
+        onClick: onClick ?? () {},
       ));
 }

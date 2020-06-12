@@ -16,12 +16,14 @@ class FirstPageState implements Cloneable<FirstPageState> {
   Color tabBackgroundNameColor;
   Color tabBackgroundTypeColor;
   Color tagTextInfoColor;
+  Map<int, bool> collectIndexs;
 
   @override
   FirstPageState clone() {
     return FirstPageState()
-      ..currentIndex
-      ..pageOffset
+      ..currentIndex = currentIndex
+      ..pageOffset = pageOffset
+      ..collectIndexs = collectIndexs
       ..firstPageStatus = firstPageStatus
       ..firstPageModule = firstPageModule
       ..scrollController = scrollController

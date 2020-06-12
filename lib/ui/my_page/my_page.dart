@@ -30,6 +30,14 @@ class MyPage extends StatelessWidget {
             slivers: <Widget>[
               _buildMyMessageWidget(vm, context),
               SliverToBoxAdapter(
+                child: _buildRowItem(context, itemIcon: Icons.build, title: '项目'),
+              ),
+              _buildDivider(height: 1),
+              SliverToBoxAdapter(
+                child: _buildRowItem(context, itemIcon: Icons.category, title: '体系'),
+              ),
+              _buildDivider(height: 1),
+              SliverToBoxAdapter(
                 child: _buildRowItem(context, itemIcon: Icons.question_answer, title: '问答'),
               ),
               _buildDivider(title: '积分', padding: EdgeInsets.only(top: 4, right: 4, left: 8, bottom: 4)),
@@ -342,7 +350,10 @@ class MyPage extends StatelessWidget {
 
   String _getCollectNum(MyViewModule vm) {
     if (vm.webCollectModule != null || vm.articleCollectModule != null) {
-      return '${vm.webCollectModule?.webCollectDatas?.length ?? 0 + (vm.articleCollectModule?.articleCollectData?.total ?? 0)}';
+      var webCollectCount = vm.webCollectModule?.webCollectDatas?.length ?? 0;
+      var articleCollectCount = vm.articleCollectModule?.articleCollectData?.total ?? 0;
+      var total = webCollectCount + articleCollectCount;
+      return '${total}';
     }
     return '0';
   }
