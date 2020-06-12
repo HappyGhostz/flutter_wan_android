@@ -4,4 +4,8 @@ class RouterUtil {
   static void pushNameAndRemove(BuildContext context, String routeName, {bool isRootRoute = false}) {
     Navigator.pushNamedAndRemoveUntil(context, routeName, (route) => isRootRoute);
   }
+
+  static void pushName(BuildContext context, String routeName, {bool isRootRoute = false}) {
+    Navigator.pushNamed(context, routeName);
+  }
 }

@@ -7,6 +7,9 @@ class NetPath {
   static const BANNER = '/banner/json';
   static const TOP_ARTICLE = '/article/top/json';
   static const NAVIGATION = '/navi/json';
+  static const INTEGRAL = '/lg/coin/userinfo/json';
+  static const WEB_COLLECT = '/lg/collect/usertools/json';
+  static const LOGOUT = '/user/logout/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';
@@ -17,5 +20,15 @@ class NetPath {
   ///wxarticle/list/408/1/json
   static String getPublicAccountHistoryArticle(int chapterId, int index) {
     return '/wxarticle/list/$chapterId/$index/json';
+  }
+
+  ///lg/collect/list/0/json
+  static String getArticleCollect(int index) {
+    return '/lg/collect/list/$index/json';
+  }
+
+  ///user/lg/private_articles/1/json
+  static String getMyShare(int index) {
+    return '/user/lg/private_articles/$index/json';
   }
 }

@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
             leading: IconButton(
                 icon: Icon(Icons.close),
                 onPressed: () {
-                  viewModule.exitApp();
+                  Navigator.of(context).pop();
                 }),
           ),
           body: PageTransitionSwitcher(

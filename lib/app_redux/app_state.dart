@@ -8,6 +8,7 @@ import 'package:flutterwanandroid/type/clone.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_state.dart';
+import 'package:flutterwanandroid/ui/my_page/redux/my_state.dart';
 import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_state.dart';
 import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_state.dart';
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
@@ -24,6 +25,7 @@ class AppState implements Cloneable<AppState> {
     this.firstPageState,
     this.publicAccountPageState,
     this.publicAccountHistoryState,
+    this.myState,
     this.navigationState,
   }) {
     var options = BaseOptions(
@@ -48,6 +50,7 @@ class AppState implements Cloneable<AppState> {
   PublicAccountState publicAccountPageState;
   PublicAccountHistoryState publicAccountHistoryState;
   NavigationState navigationState;
+  MyState myState;
 
   @override
   AppState clone() {
@@ -59,6 +62,7 @@ class AppState implements Cloneable<AppState> {
       ..publicAccountPageState = publicAccountPageState
       ..publicAccountHistoryState = publicAccountHistoryState
       ..navigationState = navigationState
+      ..myState = myState
       ..splashImg = splashImg
       ..navigatorKey = navigatorKey
       ..dio = dio
