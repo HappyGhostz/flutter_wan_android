@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 String refreshCacheResponse = 'refresf';
 String userNameKey = 'userName';
 String userPasswordKey = 'userPassword';
+String webUrlKey = 'webUrlKey';
+String webTitle = 'webTitleKey';
 
 var dioErrorValue = <DioErrorType, String>{
   DioErrorType.CANCEL: '网络请求被取消!',

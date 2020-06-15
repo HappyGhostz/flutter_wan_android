@@ -5,7 +5,7 @@ class RouterUtil {
     Navigator.pushNamedAndRemoveUntil(context, routeName, (route) => isRootRoute);
   }
 
-  static void pushName(BuildContext context, String routeName, {bool isRootRoute = false}) {
-    Navigator.pushNamed(context, routeName);
+  static void pushName(BuildContext context, String routeName, {bool isRootRoute = false, Map<String, dynamic> params}) {
+    Navigator.pushNamed(context, routeName, arguments: params ?? <String, dynamic>{});
   }
 }

@@ -95,7 +95,7 @@ class FirstPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                _buildArticleTitle(topArticleData.title),
+                _buildArticleTitle(topArticleData.title, vm, true, topArticleIndexCount, context),
                 Padding(
                   padding: edge16_8,
                   child: Row(
@@ -151,7 +151,7 @@ class FirstPage extends StatelessWidget {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              _buildArticleTitle(article.title),
+              _buildArticleTitle(article.title, vm, false, articleIndexCount, context),
               Padding(
                 padding: edge16_8,
                 child: Row(
@@ -240,14 +240,25 @@ class FirstPage extends StatelessWidget {
     );
   }
 
-  Widget _buildArticleTitle(String title) {
-    return Padding(
-      padding: edge16_8,
-      child: Text(
-        title,
-        maxLines: 2,
-        style: AppTextStyle.head(color: AppColors.black),
-        overflow: TextOverflow.ellipsis,
+  Widget _buildArticleTitle(String title, FirstPageViewModule vm, bool isTop, int indexCount, BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        if (isTop) {
+          var topArticle = vm.firstPageModule.topArticle.data[indexCount];
+          vm.goToTopArticle(context, topArticle);
+        } else {
+          var article = vm.firstPageModule.articleModule.data.datas[indexCount];
+          vm.goToArticle(context, article);
+        }
+      },
+      child: Padding(
+        padding: edge16_8,
+        child: Text(
+          title,
+          maxLines: 2,
+          style: AppTextStyle.head(color: AppColors.black),
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }

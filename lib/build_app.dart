@@ -21,6 +21,9 @@ import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_page.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
+import 'package:flutterwanandroid/ui/web/redux/web_state.dart';
+import 'package:flutterwanandroid/ui/web/web_view_widget.dart';
+import 'package:flutterwanandroid/utils/constent_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
@@ -48,9 +51,13 @@ Future<Widget> buildAppWidget() async {
               });
             case AppRouter.homeRouterName:
               return SlideRightRoute<void>(page: HomePage());
-//              return MaterialPageRoute<void>(builder: (context) {
-//                return HomePage();
-//              });
+            case AppRouter.webRouterName:
+              var params = routeSettings.arguments as Map<String, dynamic>;
+              return SlideRightRoute<void>(
+                  page: WebViewScreen(
+                url: params[webUrlKey] as String,
+                title: params[webTitle] as String,
+              ));
             default:
               return MaterialPageRoute<void>(builder: (context) {
                 return SplashPage();
@@ -74,6 +81,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       publicAccountPageState: PublicAccountState(),
       publicAccountHistoryState: PublicAccountHistoryState(),
       myState: MyState(),
+      webState: WebState(),
       navigationState: NavigationState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,

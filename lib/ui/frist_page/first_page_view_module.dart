@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
+import 'package:flutterwanandroid/app_router.dart';
+import 'package:flutterwanandroid/module/first_page/article.dart';
 import 'package:flutterwanandroid/module/first_page/fist_page_module.dart';
+import 'package:flutterwanandroid/module/first_page/top_article.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_action.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
+import 'package:flutterwanandroid/utils/router_utils.dart';
 import 'package:redux/redux.dart';
 
 class FirstPageViewModule {
@@ -29,6 +33,8 @@ class FirstPageViewModule {
   Color tagTextInfoColor;
   Map<int, bool> collectIndexs;
   Function(BuildContext context, bool collect, bool isTopArticle, int indexCount) updateCollectAction;
+  Function(BuildContext context, TopArticleData topArticle) goToTopArticle;
+  Function(BuildContext context, Datas article) goToArticle;
 
   static FirstPageViewModule fromStore(Store<AppState> store) {
     var firstState = store.state.firstPageState;
@@ -59,6 +65,18 @@ class FirstPageViewModule {
       }
       ..updateCollectAction = (context, collect, isTopArticle, indexCount) {
         store.dispatch(changeTheCollectStatusAction(context, collect: collect, isTopArticle: isTopArticle, indexCount: indexCount));
+      }
+      ..goToTopArticle = (context, topArticle) {
+        var params = <String, dynamic>{};
+        params[webTitle] = topArticle.title;
+        params[webUrlKey] = topArticle.link;
+        RouterUtil.pushName(context, AppRouter.webRouterName, params: params);
+      }
+      ..goToArticle = (context, article) {
+        var params = <String, dynamic>{};
+        params[webTitle] = article.title;
+        params[webUrlKey] = article.link;
+        RouterUtil.pushName(context, AppRouter.webRouterName, params: params);
       };
   }
 }

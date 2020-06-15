@@ -1,7 +1,7 @@
 import 'package:flutterwanandroid/module/first_page/article.dart';
 
 class TopArticle {
-  List<Data> data;
+  List<TopArticleData> data;
   int errorCode;
   String errorMsg;
 
@@ -9,9 +9,9 @@ class TopArticle {
 
   TopArticle.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <TopArticleData>[];
       json['data'].forEach((dynamic v) {
-        data.add(Data.fromJson(v as Map<String, dynamic>));
+        data.add(TopArticleData.fromJson(v as Map<String, dynamic>));
       });
     }
     errorCode = json['errorCode'] as int;
@@ -29,7 +29,7 @@ class TopArticle {
   }
 }
 
-class Data {
+class TopArticleData {
   String apkLink;
   int audit;
   String author;
@@ -62,7 +62,7 @@ class Data {
   int visible;
   int zan;
 
-  Data(
+  TopArticleData(
       {this.apkLink,
       this.audit,
       this.author,
@@ -95,7 +95,7 @@ class Data {
       this.visible,
       this.zan});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  TopArticleData.fromJson(Map<String, dynamic> json) {
     apkLink = json['apkLink'] as String;
     audit = json['audit'] as int;
     author = json['author'] as String;
