@@ -5,9 +5,13 @@ class TabControllerWidget extends StatefulWidget {
     Key key,
     @required this.tabChildren,
     @required this.tabBarViews,
+    this.width,
+    this.isScroller,
   }) : super(key: key);
   final List<Widget> tabChildren;
   final List<Widget> tabBarViews;
+  final double width;
+  final bool isScroller;
 
   @override
   State<StatefulWidget> createState() => _TabControllerWidgetState();
@@ -28,12 +32,15 @@ class _TabControllerWidgetState extends State<TabControllerWidget> with TickerPr
       children: <Widget>[
         Card(
           elevation: 4,
-          child: TabBar(
-            isScrollable: true,
-            tabs: widget.tabChildren,
-            controller: _tabController,
-            unselectedLabelColor: Colors.blue[100],
-            labelColor: Colors.blue,
+          child: SizedBox(
+            width: widget.width == null ? null : widget.width,
+            child: TabBar(
+              isScrollable: widget.isScroller ?? true,
+              tabs: widget.tabChildren,
+              controller: _tabController,
+              unselectedLabelColor: Colors.blue[100],
+              labelColor: Colors.blue,
+            ),
           ),
         ),
         Expanded(

@@ -59,6 +59,8 @@ class AppBassTextField extends StatelessWidget {
       this.enabled,
       this.prefixIconColor,
       this.suffixIconColor,
+      this.maxLines,
+      this.minLines,
       this.prefix})
       : super(key: key);
 
@@ -83,6 +85,8 @@ class AppBassTextField extends StatelessWidget {
       this.labelTextStyle,
       this.prefixIconColor,
       this.suffixIconColor,
+      this.maxLines,
+      this.minLines,
       this.enabled})
       : customizedInputDecoration = InputDecoration(
           enabledBorder:
@@ -128,6 +132,8 @@ class AppBassTextField extends StatelessWidget {
     this.labelText,
     this.labelTextStyle,
     this.prefixIconColor,
+    this.maxLines,
+    this.minLines,
     this.suffixIconColor,
     this.enabled,
   })  : customizedInputDecoration = InputDecoration(
@@ -172,6 +178,8 @@ class AppBassTextField extends StatelessWidget {
     this.labelText,
     this.labelTextStyle,
     this.prefixIconColor,
+    this.maxLines,
+    this.minLines,
     this.suffixIconColor,
     this.enabled,
   })  : customizedInputDecoration = InputDecoration(
@@ -213,6 +221,8 @@ class AppBassTextField extends StatelessWidget {
     this.labelTextStyle,
     this.enabled,
     this.prefixIconColor,
+    this.maxLines,
+    this.minLines,
     this.suffixIconColor,
     this.prefix,
   })  : customizedInputDecoration = InputDecoration(
@@ -247,6 +257,8 @@ class AppBassTextField extends StatelessWidget {
     this.labelText,
     this.labelTextStyle,
     this.prefixIconColor,
+    this.maxLines,
+    this.minLines,
     this.suffixIconColor,
     this.enabled,
   })  : customizedInputDecoration = InputDecoration(
@@ -284,6 +296,8 @@ class AppBassTextField extends StatelessWidget {
     this.labelTextStyle,
     this.prefixIconColor,
     this.suffixIconColor,
+    this.maxLines,
+    this.minLines,
     this.enabled,
   })  : customizedInputDecoration = InputDecoration(
           enabledBorder:
@@ -323,6 +337,8 @@ class AppBassTextField extends StatelessWidget {
     this.labelText,
     this.labelTextStyle,
     this.prefixIconColor,
+    this.maxLines,
+    this.minLines,
     this.suffixIconColor,
     this.enabled,
   })  : customizedInputDecoration = InputDecoration(
@@ -335,6 +351,8 @@ class AppBassTextField extends StatelessWidget {
         maxLength = null;
 
   final int maxLength;
+  final int maxLines;
+  final int minLines;
   Color primaryColor;
   final TextInputType textInputType;
   final TextStyle textStyle;
@@ -386,7 +404,8 @@ class AppBassTextField extends StatelessWidget {
             textInputAction: textInputAction,
             autofocus: false,
             maxLength: maxLength,
-            maxLines: 1,
+            maxLines: maxLines,
+            minLines: minLines,
             cursorColor: primaryColor,
             cursorRadius: const Radius.circular(20.0),
             cursorWidth: 1.0,

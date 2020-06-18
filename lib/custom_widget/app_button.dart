@@ -11,6 +11,7 @@ class AppButton extends StatelessWidget {
     this.textStyle,
     this.buttonColor,
     this.type = AppButtonType.primary,
+    this.width,
   })  : assert(text != null),
         super(key: key);
 
@@ -19,12 +20,13 @@ class AppButton extends StatelessWidget {
   final AppButtonType type;
   final TextStyle textStyle;
   final Color buttonColor;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       height: 48.0,
-      minWidth: double.infinity,
+      minWidth: width ?? double.infinity,
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6.0)),
         side: type == AppButtonType.secondary ? const BorderSide(color: AppColors.grey) : BorderSide.none,

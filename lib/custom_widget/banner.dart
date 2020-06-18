@@ -374,10 +374,14 @@ class BannerViewState extends State<BannerView> with SingleTickerProviderStateMi
   }
 
   Widget _bannerTextInfoWidget() {
+    var textIndex = _currentIndex % _banners.length;
+    if (textIndex == 0) {
+      textIndex = 1;
+    }
     return Opacity(
         opacity: opacityAnimation.value,
         child: Text(
-          widget.itemTextInfo == null ? "" : widget.itemTextInfo(_currentIndex - 1) == null ? "" : widget.itemTextInfo(_currentIndex - 1),
+          widget.itemTextInfo == null ? "" : widget.itemTextInfo(textIndex - 1) == null ? "" : widget.itemTextInfo(textIndex - 1),
           style: TextStyle(color: Colors.white, fontSize: 12.0),
         ));
   }

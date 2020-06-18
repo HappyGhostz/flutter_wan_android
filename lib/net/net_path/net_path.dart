@@ -10,6 +10,7 @@ class NetPath {
   static const INTEGRAL = '/lg/coin/userinfo/json';
   static const WEB_COLLECT = '/lg/collect/usertools/json';
   static const LOGOUT = '/user/logout/json';
+  static const ADD_TODO = '/lg/todo/add/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';
@@ -39,5 +40,21 @@ class NetPath {
 
   static String unCollectArticle(int id) {
     return '/lg/uncollect_originId/$id/json';
+  }
+
+  static String getTodoLists(int index) {
+    return '/lg/todo/v2/list/$index/json';
+  }
+
+  static String changeStatusForTodo(int id) {
+    return '/lg/todo/done/$id/json';
+  }
+
+  static String updateTodoItem(int id) {
+    return '/lg/todo/update/$id/json';
+  }
+
+  static String deletedTodoItem(int id) {
+    return '/lg/todo/delete/$id/json';
   }
 }

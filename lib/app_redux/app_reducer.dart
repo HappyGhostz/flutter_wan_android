@@ -10,6 +10,7 @@ import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_reducer.da
 import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_reducer.dart';
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_reducer.dart';
 import 'package:flutterwanandroid/ui/splash/splash_reducer.dart';
+import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_reducer.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_reducer.dart';
 import 'package:flutterwanandroid/utils/dialog_manager.dart';
 
@@ -41,5 +42,6 @@ AppState appReducer(AppState state, dynamic action) {
     ..publicAccountHistoryState = publicAccountHistoryPageReducer(state.publicAccountHistoryState, action)
     ..navigationState = navigationPageReducer(state.navigationState, action)
     ..myState = myPageReducer(state.myState, action)
-    ..webState = webReducer(state.webState, action);
+    ..webState = webReducer(state.webState, action)
+    ..todoState = todoReducer(state.todoState, action);
 }

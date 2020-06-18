@@ -35,6 +35,9 @@ dependencies:
   equatable: ^1.1.1
   animations: ^1.0.0+5
   webview_flutter: ^0.3.22+1
+  flare_flutter: ^2.0.3
+  nima: ^1.0.5
+  timeline_list: ^0.0.5
 
 dev_dependencies:
   flutter_test:

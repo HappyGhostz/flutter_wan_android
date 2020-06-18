@@ -13,6 +13,7 @@ import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_state.dart
 import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_state.dart';
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
+import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_state.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_state.dart';
 
 class AppState implements Cloneable<AppState> {
@@ -29,6 +30,7 @@ class AppState implements Cloneable<AppState> {
     this.myState,
     this.navigationState,
     this.webState,
+    this.todoState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -54,6 +56,7 @@ class AppState implements Cloneable<AppState> {
   NavigationState navigationState;
   MyState myState;
   WebState webState;
+  TodoState todoState;
 
   @override
   AppState clone() {
@@ -72,6 +75,7 @@ class AppState implements Cloneable<AppState> {
       ..cookJar = cookJar
       ..appDependency = appDependency
       ..famousSentence = famousSentence
-      ..webState = webState;
+      ..webState = webState
+      ..todoState = todoState;
   }
 }

@@ -18,4 +18,13 @@ class DataUtil {
       return false;
     }
   }
+
+  static String todayStr() {
+    try {
+      var today = DateTime.now();
+      return '${today.year}-${today.month}-${today.day}';
+    } catch (e) {
+      return null;
+    }
+  }
 }

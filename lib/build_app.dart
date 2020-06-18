@@ -21,6 +21,7 @@ import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_page.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
+import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_state.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_state.dart';
 import 'package:flutterwanandroid/ui/web/web_view_widget.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
@@ -82,6 +83,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       publicAccountHistoryState: PublicAccountHistoryState(),
       myState: MyState(),
       webState: WebState(),
+      todoState: TodoState(),
       navigationState: NavigationState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,

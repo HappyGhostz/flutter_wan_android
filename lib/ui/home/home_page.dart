@@ -1,9 +1,13 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/style/app_colors.dart';
 import 'package:flutterwanandroid/style/app_theme.dart';
 import 'package:flutterwanandroid/ui/home/home_view_module.dart';
+import 'package:flutterwanandroid/ui/to_do_page/to_do_screen.dart';
+
+const double _fabDimension = 56.0;
 
 class HomePage extends StatelessWidget {
   @override
@@ -64,21 +68,30 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          floatingActionButton: GestureDetector(
-            onTap: () {},
-            child: Card(
-              shape: CircleBorder(),
-              elevation: 4,
-              child: Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
-                child: Icon(
-                  Icons.border_color,
-                  color: AppColors.white,
-                ),
+          floatingActionButton: OpenContainer(
+            transitionType: ContainerTransitionType.fade,
+            openBuilder: (BuildContext context, VoidCallback _) {
+              return ToDoScreen();
+            },
+            closedElevation: 6.0,
+            closedShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(_fabDimension / 2),
               ),
             ),
+            closedColor: Theme.of(context).primaryColor,
+            closedBuilder: (BuildContext context, VoidCallback openContainer) {
+              return SizedBox(
+                height: _fabDimension,
+                width: _fabDimension,
+                child: Center(
+                  child: Icon(
+                    Icons.border_color,
+                    color: AppColors.white,
+                  ),
+                ),
+              );
+            },
           ),
         );
       },
