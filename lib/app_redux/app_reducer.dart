@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterwanandroid/app_redux/app_action.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/app_router.dart';
+import 'package:flutterwanandroid/ui/author/redux/author_reducer.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_reducer.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_reducer.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_reducer.dart';
@@ -43,5 +44,6 @@ AppState appReducer(AppState state, dynamic action) {
     ..navigationState = navigationPageReducer(state.navigationState, action)
     ..myState = myPageReducer(state.myState, action)
     ..webState = webReducer(state.webState, action)
-    ..todoState = todoReducer(state.todoState, action);
+    ..todoState = todoReducer(state.todoState, action)
+    ..authorState = authorReducer(state.authorState, action);
 }

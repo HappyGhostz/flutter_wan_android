@@ -57,4 +57,8 @@ class NetPath {
   static String deletedTodoItem(int id) {
     return '/lg/todo/delete/$id/json';
   }
+
+  static String getAuthorList(int index) {
+    return '/article/list/$index/json';
+  }
 }

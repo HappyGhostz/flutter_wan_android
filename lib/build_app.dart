@@ -10,6 +10,8 @@ import 'package:flutterwanandroid/app_router.dart';
 import 'package:flutterwanandroid/custom_middleware/http_middleware.dart';
 import 'package:flutterwanandroid/custom_page_route/slide_route.dart';
 import 'package:flutterwanandroid/style/app_theme.dart';
+import 'package:flutterwanandroid/ui/author/auther_page.dart';
+import 'package:flutterwanandroid/ui/author/redux/author_state.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/home_page.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
@@ -59,6 +61,13 @@ Future<Widget> buildAppWidget() async {
                 url: params[webUrlKey] as String,
                 title: params[webTitle] as String,
               ));
+            case AppRouter.authorArticleRouterName:
+              var params = routeSettings.arguments as Map<String, dynamic>;
+              return SlideRightRoute<void>(
+                  page: AuthorPage(
+                author: params[authorKey] as String,
+              ));
+
             default:
               return MaterialPageRoute<void>(builder: (context) {
                 return SplashPage();
@@ -84,6 +93,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       myState: MyState(),
       webState: WebState(),
       todoState: TodoState(),
+      authorState: AuthorState(),
       navigationState: NavigationState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,

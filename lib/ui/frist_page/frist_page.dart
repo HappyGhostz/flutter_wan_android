@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
+import 'package:flutterwanandroid/app_router.dart';
 import 'package:flutterwanandroid/custom_widget/banner.dart';
 import 'package:flutterwanandroid/custom_widget/load_more.dart';
 import 'package:flutterwanandroid/custom_widget/page_show_widget.dart';
@@ -17,6 +18,7 @@ import 'package:flutterwanandroid/ui/frist_page/services/first_page_service.dart
 import 'package:flutterwanandroid/utils/constent_utils.dart';
 import 'package:flutterwanandroid/utils/data_utils.dart';
 import 'package:flutterwanandroid/utils/image_utils.dart';
+import 'package:flutterwanandroid/utils/router_utils.dart';
 
 class FirstPage extends StatelessWidget {
   @override
@@ -119,7 +121,7 @@ class FirstPage extends StatelessWidget {
                             )
                           : Container(),
                       _buildTagsView(topArticleData.tags, vm),
-                      _buildAuthorOrShareUser(topArticleData.author, topArticleData.shareUser, vm),
+                      _buildAuthorOrShareUser(topArticleData.author, topArticleData.shareUser, vm, context),
                       _buildArticleType(topArticleData.superChapterName, topArticleData.chapterName),
                     ],
                   ),
@@ -167,7 +169,7 @@ class FirstPage extends StatelessWidget {
                           )
                         : Container(),
                     _buildTagsView(article.tags, vm),
-                    _buildAuthorOrShareUser(article.author, article.shareUser, vm),
+                    _buildAuthorOrShareUser(article.author, article.shareUser, vm, context),
                     _buildArticleType(article.superChapterName, article.chapterName),
                   ],
                 ),
@@ -298,7 +300,7 @@ class FirstPage extends StatelessWidget {
     return tagRow;
   }
 
-  Widget _buildAuthorOrShareUser(String author, String shareUser, FirstPageViewModule vm) {
+  Widget _buildAuthorOrShareUser(String author, String shareUser, FirstPageViewModule vm, BuildContext context) {
     var name = '';
     var title = '';
     if (author.isNotEmpty) {
@@ -314,6 +316,13 @@ class FirstPage extends StatelessWidget {
       },
       onTapUp: (detail) {
 //        vm.changeNameColorForTapDown(AppColors.black);
+      },
+      onTap: () {
+        if (author.isNotEmpty) {
+          RouterUtil.pushName(context, AppRouter.authorArticleRouterName, params: <String, dynamic>{
+            authorKey: author,
+          });
+        }
       },
       child: Padding(
         padding: edgeRight_8,

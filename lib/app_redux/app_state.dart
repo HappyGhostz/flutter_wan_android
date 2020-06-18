@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterwanandroid/app_redux/app_dependencies.dart';
 import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/type/clone.dart';
+import 'package:flutterwanandroid/ui/author/redux/author_state.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_state.dart';
@@ -31,6 +32,7 @@ class AppState implements Cloneable<AppState> {
     this.navigationState,
     this.webState,
     this.todoState,
+    this.authorState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -57,6 +59,7 @@ class AppState implements Cloneable<AppState> {
   MyState myState;
   WebState webState;
   TodoState todoState;
+  AuthorState authorState;
 
   @override
   AppState clone() {
@@ -76,6 +79,7 @@ class AppState implements Cloneable<AppState> {
       ..appDependency = appDependency
       ..famousSentence = famousSentence
       ..webState = webState
-      ..todoState = todoState;
+      ..todoState = todoState
+      ..authorState = authorState;
   }
 }

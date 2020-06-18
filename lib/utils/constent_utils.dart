@@ -8,6 +8,7 @@ String webTitle = 'webTitleKey';
 String editTitleKey = 'titleKey';
 String editContentKey = 'contentKey';
 String editTimeKey = 'timeKey';
+String authorKey = 'authorKey';
 
 var dioErrorValue = <DioErrorType, String>{
   DioErrorType.CANCEL: '网络请求被取消!',
