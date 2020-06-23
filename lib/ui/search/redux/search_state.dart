@@ -17,6 +17,7 @@ class SearchState extends Cloneable<SearchState> {
   bool isPerformingRequest;
   Map<int, bool> collectIndexs;
   String keyWord;
+  int currentIndex;
 
   @override
   SearchState clone() {
@@ -31,6 +32,7 @@ class SearchState extends Cloneable<SearchState> {
       ..pageOffset = pageOffset
       ..collectIndexs = collectIndexs
       ..keyWord = keyWord
+      ..currentIndex = currentIndex
       ..historyList = historyList;
   }
 }

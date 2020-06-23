@@ -11,6 +11,7 @@ class PublicAccountViewModule {
 
   PublicAccountTabBarModule publicAccountTabBarModule;
   Function(BuildContext context) refreshChapterData;
+  Function(int id, String publicAccountSearchName) upDateAppStatePublicAccountId;
 
   static PublicAccountViewModule fromStore(Store<AppState> store) {
     var state = store.state.publicAccountPageState;
@@ -18,6 +19,12 @@ class PublicAccountViewModule {
       ..publicAccountTabBarModule = state.publicAccountTabBarModule
       ..refreshChapterData = (context) {
         store.dispatch(initTabBarData(context));
+      }
+      ..upDateAppStatePublicAccountId = (id, name) {
+        var appState = store.state;
+        appState.publicAccountSearchId = id;
+        appState.publicAccountSearchName = name;
+        print('${appState.publicAccountSearchId}');
       };
   }
 }

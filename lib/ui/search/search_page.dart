@@ -18,6 +18,12 @@ import 'package:flutterwanandroid/utils/image_utils.dart';
 import 'package:flutterwanandroid/utils/router_utils.dart';
 
 class SearchPage extends StatelessWidget {
+  SearchPage({
+    Key key,
+    this.currentIndex,
+  }) : super(key: key);
+  final int currentIndex;
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, SearchViewModule>(
@@ -30,6 +36,7 @@ class SearchPage extends StatelessWidget {
           var searchState = store.state.searchState;
           searchState.textEditingController = TextEditingController();
           searchState.isEditing = false;
+          searchState.currentIndex = currentIndex;
           searchState.isPerformingRequest = false;
           searchState.searchResultResponseModule = null;
           searchState.pageOffset = 0;
@@ -69,7 +76,7 @@ class SearchPage extends StatelessWidget {
                       if (vm.keyWord == null || vm.keyWord.isEmpty) {
                         vm.refreshHotKey();
                       } else {
-                        vm.search(vm.keyWord, 0);
+                        vm.search(vm.keyWord, 0, currentIndex);
                       }
                     },
                   )
@@ -104,7 +111,7 @@ class SearchPage extends StatelessWidget {
               child: TextField(
                 textInputAction: TextInputAction.search,
                 onSubmitted: (keyWord) {
-                  vm.search(keyWord, 0);
+                  vm.search(keyWord, 0, currentIndex);
                   vm.saveHistoryKey(keyWord, vm.historyList);
                 },
                 controller: vm.textEditingController,
@@ -113,9 +120,9 @@ class SearchPage extends StatelessWidget {
                 cursorRadius: Radius.circular(30.0),
                 style: TextStyle(color: AppColors.white, fontWeight: FontWeight.w300),
                 decoration: InputDecoration(
-                    hintText: 'Search(点这里)',
+                    hintText: currentIndex == 1 ? '${vm.publicAccountSearchName}:公众号内搜索' : 'Search(点这里)',
                     border: InputBorder.none,
-                    hintStyle: AppTextStyle.body(fontSize: 14, fontWeight: FontWeight.w300, color: AppColors.grey)),
+                    hintStyle: AppTextStyle.body(fontSize: 14, fontWeight: FontWeight.w300, color: AppColors.black)),
               ),
             )),
             vm.isEditing
@@ -215,7 +222,7 @@ class SearchPage extends StatelessWidget {
       ),
       onTap: () {
         vm.textEditingController.text = tag;
-        vm.search(tag, 0);
+        vm.search(tag, 0, currentIndex);
         vm.saveHistoryKey(tag, vm.historyList);
       },
     );
@@ -280,7 +287,7 @@ class SearchPage extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         vm.textEditingController.text = history;
-        vm.search(history, 0);
+        vm.search(history, 0, currentIndex);
       },
       child: Container(
         padding: EdgeInsets.all(10.0),
@@ -322,7 +329,7 @@ class SearchPage extends StatelessWidget {
           },
           itemCount: vm.searchResultResponseModule != null ? vm.searchResultResponseModule.searchResultModule.searchResults.length + 1 : 1),
       onRefresh: () async {
-        vm.search(vm.textEditingController.text, 0);
+        vm.search(vm.textEditingController.text, 0, currentIndex);
         return;
       },
     );
@@ -431,7 +438,7 @@ class SearchPage extends StatelessWidget {
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       );
-    } else {
+    } else if (htmlInfos.length == 1) {
       var searchKey = getSearchKeyFromHtml(htmlInfos[0]);
       var titleSplites = title.split(htmlInfos[0]);
       var textSpans = <TextSpan>[
@@ -445,6 +452,13 @@ class SearchPage extends StatelessWidget {
           children: textSpans,
         ),
         maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      );
+    } else {
+      titileWidget = Text(
+        title,
+        maxLines: 2,
+        style: AppTextStyle.head(color: AppColors.black),
         overflow: TextOverflow.ellipsis,
       );
     }

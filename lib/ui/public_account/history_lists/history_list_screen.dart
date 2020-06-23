@@ -1,13 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterwanandroid/app_router.dart';
+import 'package:flutterwanandroid/custom_widget/dialog/loading_dialog.dart';
 import 'package:flutterwanandroid/custom_widget/load_more.dart';
 import 'package:flutterwanandroid/custom_widget/page_show_widget.dart';
 import 'package:flutterwanandroid/module/public_account/history_list_module.dart';
+import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/style/app_colors.dart';
 import 'package:flutterwanandroid/style/app_constent_padding.dart';
 import 'package:flutterwanandroid/style/app_text_style.dart';
 import 'package:flutterwanandroid/ui/public_account/services/public_account_services.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
+import 'package:flutterwanandroid/utils/router_utils.dart';
 
 class PublicAccountHistoryListScreen extends StatefulWidget {
   PublicAccountHistoryListScreen({
@@ -30,6 +34,7 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
   int pageOffset;
   PublicAccountPageService publicAccountPageService;
   int chapterId;
+  Map<int, bool> collects;
 
   @override
   void initState() {
@@ -160,18 +165,20 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
 
   Widget _buildHistoryItem(int index) {
     var historyItem = publicAccountHistoryListModule.historyListData.datas[index];
+    var isCurrentCollect = collects == null ? null : collects[index];
+    var isCollect = isCurrentCollect ?? historyItem.collect ?? false;
     return Container(
       color: AppColors.white,
       padding: EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildCollectWidget(historyItem.collect ?? false),
+          _buildCollectWidget(isCollect ?? false, index, historyItem),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              _buildArticleTitle(historyItem.title),
+              _buildArticleTitle(historyItem.title, historyItem),
               Padding(
                 padding: edge16_8,
                 child: _buildTimeInfo(historyItem.niceDate),
@@ -183,23 +190,33 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
     );
   }
 
-  IconButton _buildCollectWidget(bool collect) {
+  IconButton _buildCollectWidget(bool collect, int index, HistoryDatas historyItem) {
     return IconButton(
         icon: Icon(
           collect ? Icons.favorite : Icons.favorite_border,
           color: Colors.red,
         ),
-        onPressed: () {});
+        onPressed: () {
+          _upDateCollect(context, !collect, index, historyItem);
+        });
   }
 
-  Widget _buildArticleTitle(String title) {
-    return Padding(
-      padding: edge16_8,
-      child: Text(
-        title,
-        maxLines: 2,
-        style: AppTextStyle.head(color: AppColors.black),
-        overflow: TextOverflow.ellipsis,
+  Widget _buildArticleTitle(String title, HistoryDatas historyItem) {
+    return GestureDetector(
+      onTap: () {
+        var params = <String, dynamic>{};
+        params[webTitle] = historyItem.title;
+        params[webUrlKey] = historyItem.link;
+        RouterUtil.pushName(context, AppRouter.webRouterName, params: params);
+      },
+      child: Padding(
+        padding: edge16_8,
+        child: Text(
+          title,
+          maxLines: 2,
+          style: AppTextStyle.head(color: AppColors.black),
+          overflow: TextOverflow.ellipsis,
+        ),
       ),
     );
   }
@@ -236,5 +253,31 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
   void showLoadingView() {
     publicAccountHistoryStatus = DataLoadStatus.loading;
     setState(() {});
+  }
+
+  void _upDateCollect(BuildContext context, bool collect, int index, HistoryDatas historyItem) async {
+    try {
+      showLoadingDialog<dynamic>(context);
+      var id = historyItem.id;
+      Response response;
+      if (collect) {
+        response = await widget.dio.post<Map<String, dynamic>>(NetPath.collectArticle(id));
+      } else {
+        response = await widget.dio.post<Map<String, dynamic>>(NetPath.unCollectArticle(id));
+      }
+      dismissDialog<void>(context);
+      var collectsCopy = <int, bool>{};
+      collectsCopy[index] = collect;
+      if (collects == null) {
+        collects = collectsCopy;
+      } else {
+        collects.addAll(collectsCopy);
+      }
+      setState(() {});
+    } on DioError catch (e) {
+      dismissDialog<void>(context);
+    } catch (e) {
+      dismissDialog<void>(context);
+    }
   }
 }

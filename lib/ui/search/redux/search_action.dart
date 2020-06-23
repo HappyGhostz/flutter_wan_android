@@ -97,12 +97,17 @@ class UpdateSearchResultModuleAction {
   String keyWord;
 }
 
-ThunkAction<AppState> searchAction(String keyWord, int index) {
+ThunkAction<AppState> searchAction(String keyWord, int index, int currentIndex) {
   return (Store<AppState> store) async {
     try {
-      var searchResponse = await store.state.dio.post<Map<String, dynamic>>(NetPath.search(index), queryParameters: <String, dynamic>{
-        'k': keyWord,
-      });
+      Response<Map<String, dynamic>> searchResponse;
+      if (currentIndex == 1) {
+        searchResponse = await store.state.dio.get<Map<String, dynamic>>(NetPath.wxSearch(store.state.publicAccountSearchId, index + 1));
+      } else {
+        searchResponse = await store.state.dio.post<Map<String, dynamic>>(NetPath.search(index), queryParameters: <String, dynamic>{
+          'k': keyWord,
+        });
+      }
       var searchResultModule = SearchResultResponseModule.fromJson(searchResponse.data);
       if (searchResultModule.errorCode != 0) {
         store.dispatch(SearchStatusChangedAction(dataLoadStatus: DataLoadStatus.failure));

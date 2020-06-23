@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+typedef ChangeTabIndex = Function(int index);
+
 class TabControllerWidget extends StatefulWidget {
   TabControllerWidget({
     Key key,
@@ -7,11 +9,13 @@ class TabControllerWidget extends StatefulWidget {
     @required this.tabBarViews,
     this.width,
     this.isScroller,
+    this.changeTabIndex,
   }) : super(key: key);
   final List<Widget> tabChildren;
   final List<Widget> tabBarViews;
   final double width;
   final bool isScroller;
+  final ChangeTabIndex changeTabIndex;
 
   @override
   State<StatefulWidget> createState() => _TabControllerWidgetState();
@@ -23,6 +27,9 @@ class _TabControllerWidgetState extends State<TabControllerWidget> with TickerPr
   @override
   void initState() {
     _tabController = TabController(vsync: this, length: widget.tabChildren.length);
+    _tabController.addListener(() {
+      widget.changeTabIndex(_tabController.index);
+    });
     super.initState();
   }
 

@@ -8,6 +8,7 @@ import 'package:flutterwanandroid/style/app_colors.dart';
 import 'package:flutterwanandroid/style/app_theme.dart';
 import 'package:flutterwanandroid/ui/home/home_view_module.dart';
 import 'package:flutterwanandroid/ui/to_do_page/to_do_screen.dart';
+import 'package:flutterwanandroid/utils/constent_utils.dart';
 
 const double _fabDimension = 56.0;
 
@@ -28,7 +29,9 @@ class HomePage extends StatelessWidget {
                 width: 30.0,
                 search: "search",
                 onTap: () {
-                  Navigator.pushNamed(context, AppRouter.search);
+                  var params = <String, dynamic>{};
+                  params[homeCurrentIndexKey] = viewModule.currentIndex;
+                  Navigator.pushNamed(context, AppRouter.search, arguments: params);
                 },
               ),
             ],

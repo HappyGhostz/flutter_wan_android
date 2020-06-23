@@ -32,6 +32,10 @@ class PublicAccountPage extends StatelessWidget {
           child: TabControllerWidget(
             tabChildren: _buildTabs(vm),
             tabBarViews: _buildTabBarViews(vm, context),
+            changeTabIndex: (index) {
+              var tabData = vm.publicAccountTabBarModule?.data[index];
+              vm.upDateAppStatePublicAccountId(tabData.id, tabData.name);
+            },
           ),
         );
       },
@@ -62,6 +66,9 @@ class PublicAccountPage extends StatelessWidget {
     }
     for (var i = 0; i < tabDatas.length; i++) {
       var tabData = tabDatas[i];
+      if (i == 0) {
+        vm.upDateAppStatePublicAccountId(tabData.id, tabData.name);
+      }
       tabs.add(KeepAliveWidget(
         child: PublicAccountHistoryListScreen(
           chapterId: tabData.id,

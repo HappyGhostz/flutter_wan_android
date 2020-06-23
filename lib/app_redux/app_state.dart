@@ -35,6 +35,8 @@ class AppState implements Cloneable<AppState> {
     this.todoState,
     this.authorState,
     this.searchState,
+    this.publicAccountSearchId,
+    this.publicAccountSearchName,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -63,6 +65,8 @@ class AppState implements Cloneable<AppState> {
   TodoState todoState;
   AuthorState authorState;
   SearchState searchState;
+  int publicAccountSearchId;
+  String publicAccountSearchName;
 
   @override
   AppState clone() {
@@ -84,6 +88,8 @@ class AppState implements Cloneable<AppState> {
       ..webState = webState
       ..todoState = todoState
       ..searchState = searchState
+      ..publicAccountSearchId = publicAccountSearchId
+      ..publicAccountSearchName = publicAccountSearchName
       ..authorState = authorState;
   }
 }

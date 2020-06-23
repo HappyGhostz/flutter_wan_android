@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/scroll_controller.dart';
 import 'package:flutterwanandroid/app_redux/app_action.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
+import 'package:flutterwanandroid/custom_widget/dialog/loading_dialog.dart';
 import 'package:flutterwanandroid/module/first_page/fist_page_module.dart';
 import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
@@ -142,6 +143,7 @@ class UpdateCollectsDataAction extends AppHttpResponseAction {
 }
 
 ThunkAction<AppState> changeTheCollectStatusAction(BuildContext context, {bool collect, bool isTopArticle, int indexCount}) {
+  showLoadingDialog<void>(context);
   return (Store<AppState> store) async {
     try {
       var id = 0;
@@ -156,12 +158,15 @@ ThunkAction<AppState> changeTheCollectStatusAction(BuildContext context, {bool c
       } else {
         response = await store.state.dio.post<Map<String, dynamic>>(NetPath.unCollectArticle(id));
       }
+      dismissDialog<void>(context);
       var collects = <int, bool>{};
       collects[indexCount] = collect;
       store.dispatch(HttpAction(context: context, response: response, action: UpdateCollectsDataAction(collects: collects)));
     } on DioError catch (e) {
+      dismissDialog<void>(context);
       store.dispatch(HttpAction(dioError: e, context: context));
     } catch (e) {
+      dismissDialog<void>(context);
       store.dispatch(HttpAction(error: e.toString(), context: context));
     }
   };

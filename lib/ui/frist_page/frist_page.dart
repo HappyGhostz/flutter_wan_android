@@ -210,6 +210,9 @@ class FirstPage extends StatelessWidget {
       banners: _buildBannerView(vm.firstPageModule.banner.bannerData, context),
       intervalDuration: Duration(seconds: 5),
       itemTextInfo: (index) {
+        if (index > vm.firstPageModule.banner.bannerData.length) {
+          index = 0;
+        }
         var ad = vm.firstPageModule.banner.bannerData[index];
         return ad.title ?? '......';
       },

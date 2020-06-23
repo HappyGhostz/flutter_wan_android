@@ -66,4 +66,8 @@ class NetPath {
   static String search(int index) {
     return '/article/query/$index/json';
   }
+
+  static String wxSearch(int chapter, int index) {
+    return '/wxarticle/list/$chapter/$index/json';
+  }
 }

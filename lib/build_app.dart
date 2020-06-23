@@ -70,8 +70,11 @@ Future<Widget> buildAppWidget() async {
                 author: params[authorKey] as String,
               ));
             case AppRouter.search:
+              var params = routeSettings.arguments as Map<String, dynamic>;
               return MaterialPageRoute<void>(builder: (context) {
-                return SearchPage();
+                return SearchPage(
+                  currentIndex: params[homeCurrentIndexKey] as int,
+                );
               });
             default:
               return MaterialPageRoute<void>(builder: (context) {
