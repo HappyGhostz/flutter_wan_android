@@ -90,4 +90,5 @@ class AppColors {
 
   static const Color primaryPurple = Color(0xFF7F4FE3);
   static const Color gray9c = Color(0xFF9C9C9C);
+  static const Color black21 = Color(0xff212121);
 }

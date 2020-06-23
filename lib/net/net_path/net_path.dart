@@ -11,6 +11,7 @@ class NetPath {
   static const WEB_COLLECT = '/lg/collect/usertools/json';
   static const LOGOUT = '/user/logout/json';
   static const ADD_TODO = '/lg/todo/add/json';
+  static const HOT_KEY = '//hotkey/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';
@@ -60,5 +61,9 @@ class NetPath {
 
   static String getAuthorList(int index) {
     return '/article/list/$index/json';
+  }
+
+  static String search(int index) {
+    return '/article/query/$index/json';
   }
 }

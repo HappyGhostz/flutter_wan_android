@@ -26,6 +26,9 @@ class WebViewScreen extends StatelessWidget {
           store.state.webState.url = url;
           store.state.webState.isShowProgress = true;
         },
+        onDispose: (store) {
+          store.state.webState.webViewController.complete();
+        },
         converter: WebViewModule.fromStore,
         builder: (context, vm) {
           return Scaffold(

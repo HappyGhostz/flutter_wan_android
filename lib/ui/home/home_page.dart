@@ -2,6 +2,8 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
+import 'package:flutterwanandroid/app_router.dart';
+import 'package:flutterwanandroid/custom_widget/photo_hero.dart';
 import 'package:flutterwanandroid/style/app_colors.dart';
 import 'package:flutterwanandroid/style/app_theme.dart';
 import 'package:flutterwanandroid/ui/home/home_view_module.dart';
@@ -22,12 +24,12 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             title: Text(getCurrentPageAppTitle(viewModule)),
             actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: AppColors.white,
-                ),
-                onPressed: () {},
+              SearchHero(
+                width: 30.0,
+                search: "search",
+                onTap: () {
+                  Navigator.pushNamed(context, AppRouter.search);
+                },
               ),
             ],
           ),

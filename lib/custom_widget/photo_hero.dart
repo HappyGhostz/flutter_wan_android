@@ -122,3 +122,31 @@ class Photo extends StatelessWidget {
     );
   }
 }
+
+class SearchHero extends StatelessWidget {
+  const SearchHero({Key key, this.search, this.onTap, this.width}) : super(key: key);
+
+  final String search;
+  final VoidCallback onTap;
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      child: Hero(
+        tag: search,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            child: Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

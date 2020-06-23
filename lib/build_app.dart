@@ -21,6 +21,8 @@ import 'package:flutterwanandroid/ui/my_page/redux/my_state.dart';
 import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_state.dart';
 import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_state.dart';
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
+import 'package:flutterwanandroid/ui/search/redux/search_state.dart';
+import 'package:flutterwanandroid/ui/search/search_page.dart';
 import 'package:flutterwanandroid/ui/splash/splash_page.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
 import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_state.dart';
@@ -67,7 +69,10 @@ Future<Widget> buildAppWidget() async {
                   page: AuthorPage(
                 author: params[authorKey] as String,
               ));
-
+            case AppRouter.search:
+              return MaterialPageRoute<void>(builder: (context) {
+                return SearchPage();
+              });
             default:
               return MaterialPageRoute<void>(builder: (context) {
                 return SplashPage();
@@ -95,6 +100,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       todoState: TodoState(),
       authorState: AuthorState(),
       navigationState: NavigationState(),
+      searchState: SearchState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

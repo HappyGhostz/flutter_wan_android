@@ -140,7 +140,7 @@ class FirstPage extends StatelessWidget {
 
   Widget _buildArticle(FirstPageViewModule vm, int articleIndexCount, BuildContext context) {
     var article = vm.firstPageModule.articleModule.data.datas[articleIndexCount];
-    var isCurrentCollect = vm.collectIndexs == null ? false : vm.collectIndexs[articleIndexCount];
+    var isCurrentCollect = vm.collectIndexs == null ? null : vm.collectIndexs[articleIndexCount];
     var isCollect = isCurrentCollect ?? article.collect ?? false;
     return Container(
       color: AppColors.white,
@@ -214,6 +214,13 @@ class FirstPage extends StatelessWidget {
         return ad.title ?? '......';
       },
       height: 200.0,
+      onTap: (index) {
+        var bannerData = vm.firstPageModule.banner.bannerData[index];
+        var params = <String, dynamic>{};
+        params[webTitle] = bannerData.title;
+        params[webUrlKey] = bannerData.url;
+        RouterUtil.pushName(context, AppRouter.webRouterName, params: params);
+      },
     );
   }
 
@@ -221,15 +228,12 @@ class FirstPage extends StatelessWidget {
     var widget = <Widget>[];
     for (var i = 0; i < banner.length; i++) {
       var bannerData = banner[i];
-      widget.add(GestureDetector(
-        child: FadeInImage.assetNetwork(
-          placeholder: getAssetsImage(),
-          image: bannerData.imagePath,
-          width: MediaQuery.of(context).size.width,
-          height: 75.0,
-          fit: BoxFit.fill,
-        ),
-        onTap: () {},
+      widget.add(FadeInImage.assetNetwork(
+        placeholder: getAssetsImage(),
+        image: bannerData.imagePath,
+        width: MediaQuery.of(context).size.width,
+        height: 75.0,
+        fit: BoxFit.fill,
       ));
     }
     return widget;

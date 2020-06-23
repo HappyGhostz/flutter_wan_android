@@ -13,6 +13,7 @@ import 'package:flutterwanandroid/ui/my_page/redux/my_state.dart';
 import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_state.dart';
 import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_state.dart';
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
+import 'package:flutterwanandroid/ui/search/redux/search_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
 import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_state.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_state.dart';
@@ -33,6 +34,7 @@ class AppState implements Cloneable<AppState> {
     this.webState,
     this.todoState,
     this.authorState,
+    this.searchState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -60,6 +62,7 @@ class AppState implements Cloneable<AppState> {
   WebState webState;
   TodoState todoState;
   AuthorState authorState;
+  SearchState searchState;
 
   @override
   AppState clone() {
@@ -80,6 +83,7 @@ class AppState implements Cloneable<AppState> {
       ..famousSentence = famousSentence
       ..webState = webState
       ..todoState = todoState
+      ..searchState = searchState
       ..authorState = authorState;
   }
 }

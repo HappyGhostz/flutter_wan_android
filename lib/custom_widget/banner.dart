@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 const MAX_COUNT = 0x7fffffff;
 
 typedef TextInfo = String Function(int index);
-typedef GestureTapCallback = void Function();
+typedef GestureTapCallback = void Function(int currentIndex);
 
 class BannerView extends StatefulWidget {
   BannerView({
@@ -287,7 +287,9 @@ class BannerViewState extends State<BannerView> with SingleTickerProviderStateMi
           var widgetBanner = _banners[index];
           return GestureDetector(
             child: widgetBanner,
-            onTap: widget.onTap,
+            onTap: () {
+              widget.onTap(_currentIndex);
+            },
             onTapDown: (details) {
               print('用户手动滑动开始2');
               _cancel(manual: true);
