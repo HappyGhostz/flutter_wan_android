@@ -11,6 +11,7 @@ import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_state.dart';
 import 'package:flutterwanandroid/ui/my_page/redux/my_state.dart';
 import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_state.dart';
+import 'package:flutterwanandroid/ui/project/reducer/project_state.dart';
 import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_state.dart';
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/search/redux/search_state.dart';
@@ -36,7 +37,9 @@ class AppState implements Cloneable<AppState> {
     this.authorState,
     this.searchState,
     this.publicAccountSearchId,
+    this.publicAccountTabIndex,
     this.publicAccountSearchName,
+    this.projectState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -66,7 +69,9 @@ class AppState implements Cloneable<AppState> {
   AuthorState authorState;
   SearchState searchState;
   int publicAccountSearchId;
+  int publicAccountTabIndex;
   String publicAccountSearchName;
+  ProjectState projectState;
 
   @override
   AppState clone() {
@@ -89,7 +94,9 @@ class AppState implements Cloneable<AppState> {
       ..todoState = todoState
       ..searchState = searchState
       ..publicAccountSearchId = publicAccountSearchId
+      ..publicAccountTabIndex = publicAccountTabIndex
       ..publicAccountSearchName = publicAccountSearchName
-      ..authorState = authorState;
+      ..authorState = authorState
+      ..projectState = projectState;
   }
 }

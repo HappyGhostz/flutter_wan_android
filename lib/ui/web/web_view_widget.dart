@@ -5,6 +5,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/style/app_colors.dart';
 import 'package:flutterwanandroid/ui/web/web_view_module.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatelessWidget {
@@ -58,8 +59,9 @@ class WebViewScreen extends StatelessWidget {
                     onWebViewCreated: (webViewController) {
                       vm.webViewController.complete(webViewController);
                     },
-                    navigationDelegate: (request) {
+                    navigationDelegate: (request) async {
                       if (!request.url.startsWith('https://') || !request.url.startsWith('http://')) {
+                        _launchURL(url);
                         return NavigationDecision.prevent;
                       }
                       print('allowing navigation to $request');
@@ -73,6 +75,10 @@ class WebViewScreen extends StatelessWidget {
                       print('Page finished loading: $url');
                       vm.changeProgressStatus(false);
                     },
+                    onWebResourceError: (error) async {
+                      print('Page ERROR: $url::${error.description}');
+                      _launchURL(url);
+                    },
                     gestureNavigationEnabled: true,
                   ),
                   vm.isShowProgress ? LinearProgressIndicator() : Container(),
@@ -81,6 +87,14 @@ class WebViewScreen extends StatelessWidget {
             }),
           );
         });
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
 

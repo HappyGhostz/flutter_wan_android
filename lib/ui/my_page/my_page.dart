@@ -112,6 +112,9 @@ class MyPage extends StatelessWidget {
 
   Widget _buildRowItem(BuildContext context, {IconData itemIcon, String title}) {
     return GestureDetector(
+      onTap: () {
+        RouterUtil.pushName(context, AppRouter.project);
+      },
       child: Row(
         children: <Widget>[
           Container(

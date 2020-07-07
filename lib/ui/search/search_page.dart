@@ -88,6 +88,7 @@ class SearchPage extends StatelessWidget {
   }
 
   Widget _buildSearchBar(BuildContext context, SearchViewModule vm) {
+    var appState = StoreProvider.of<AppState>(context);
     return Material(
       elevation: 8,
       child: Container(
@@ -120,7 +121,7 @@ class SearchPage extends StatelessWidget {
                 cursorRadius: Radius.circular(30.0),
                 style: TextStyle(color: AppColors.white, fontWeight: FontWeight.w300),
                 decoration: InputDecoration(
-                    hintText: currentIndex == 1 ? '${vm.publicAccountSearchName}:公众号内搜索' : 'Search(点这里)',
+                    hintText: currentIndex == 1 ? '${appState.state.publicAccountSearchName}:公众号内搜索' : 'Search(点这里)',
                     border: InputBorder.none,
                     hintStyle: AppTextStyle.body(fontSize: 14, fontWeight: FontWeight.w300, color: AppColors.black)),
               ),

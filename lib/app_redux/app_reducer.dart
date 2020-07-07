@@ -8,6 +8,7 @@ import 'package:flutterwanandroid/ui/home/redux/home_reducer.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_reducer.dart';
 import 'package:flutterwanandroid/ui/my_page/redux/my_reducer.dart';
 import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_reducer.dart';
+import 'package:flutterwanandroid/ui/project/reducer/project_reducer.dart';
 import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_reducer.dart';
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_reducer.dart';
 import 'package:flutterwanandroid/ui/search/redux/search_reducer.dart';
@@ -47,5 +48,6 @@ AppState appReducer(AppState state, dynamic action) {
     ..webState = webReducer(state.webState, action)
     ..todoState = todoReducer(state.todoState, action)
     ..authorState = authorReducer(state.authorState, action)
-    ..searchState = searchReducer(state.searchState, action);
+    ..searchState = searchReducer(state.searchState, action)
+    ..projectState = projectReducer(state.projectState, action);
 }

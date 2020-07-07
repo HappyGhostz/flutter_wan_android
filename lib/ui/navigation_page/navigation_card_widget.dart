@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutterwanandroid/app_router.dart';
 import 'package:flutterwanandroid/custom_widget/widget_item.dart';
 import 'package:flutterwanandroid/module/navigation/navigation_module.dart';
+import 'package:flutterwanandroid/utils/constent_utils.dart';
+import 'package:flutterwanandroid/utils/router_utils.dart';
 import 'package:flutterwanandroid/utils/widget_name_to_icon.dart';
 
 class NavigationCardWidget extends StatelessWidget {
@@ -104,7 +107,12 @@ class NavigationCardWidget extends StatelessWidget {
               flex: 1,
               child: WidgetItem(
                 title: item.title,
-                onTap: () {},
+                onTap: () {
+                  var params = <String, dynamic>{};
+                  params[webTitle] = item.title;
+                  params[webUrlKey] = item.link;
+                  RouterUtil.pushName(context, AppRouter.webRouterName, params: params);
+                },
                 index: addI,
                 totalCount: length,
                 rowLength: columnCount,

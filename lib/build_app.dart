@@ -19,6 +19,8 @@ import 'package:flutterwanandroid/ui/login_signin/log_in_page.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_state.dart';
 import 'package:flutterwanandroid/ui/my_page/redux/my_state.dart';
 import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_state.dart';
+import 'package:flutterwanandroid/ui/project/project_page.dart';
+import 'package:flutterwanandroid/ui/project/reducer/project_state.dart';
 import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_state.dart';
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/search/redux/search_state.dart';
@@ -69,6 +71,8 @@ Future<Widget> buildAppWidget() async {
                   page: AuthorPage(
                 author: params[authorKey] as String,
               ));
+            case AppRouter.project:
+              return SlideRightRoute<void>(page: ProjectPage());
             case AppRouter.search:
               var params = routeSettings.arguments as Map<String, dynamic>;
               return MaterialPageRoute<void>(builder: (context) {
@@ -104,6 +108,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       authorState: AuthorState(),
       navigationState: NavigationState(),
       searchState: SearchState(),
+      projectState: ProjectState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

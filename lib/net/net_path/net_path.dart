@@ -12,6 +12,7 @@ class NetPath {
   static const LOGOUT = '/user/logout/json';
   static const ADD_TODO = '/lg/todo/add/json';
   static const HOT_KEY = '//hotkey/json';
+  static const PROJECT_TAB = '/project/tree/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';
@@ -69,5 +70,9 @@ class NetPath {
 
   static String wxSearch(int chapter, int index) {
     return '/wxarticle/list/$chapter/$index/json';
+  }
+
+  static String getProjects(int index) {
+    return '/project/list/$index/json';
   }
 }

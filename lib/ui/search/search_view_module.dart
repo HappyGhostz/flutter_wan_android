@@ -27,8 +27,6 @@ class SearchViewModule {
     this.goToSearchArticle,
     this.updateCollectAction,
     this.currentIndex,
-    this.publicAccountSearchId,
-    this.publicAccountSearchName,
   });
 
   bool isEditing;
@@ -50,15 +48,13 @@ class SearchViewModule {
   Function(BuildContext context, SearchResult searchResult) goToSearchArticle;
   Function(BuildContext context, bool collect, int indexCount) updateCollectAction;
   int currentIndex;
-  int publicAccountSearchId;
-  String publicAccountSearchName;
+//  int publicAccountSearchId;
+//  String publicAccountSearchName;
 
   static SearchViewModule fromStore(Store<AppState> store) {
     var searchState = store.state.searchState;
     return SearchViewModule()
       ..isEditing = searchState.isEditing
-      ..publicAccountSearchId = store.state.publicAccountSearchId
-      ..publicAccountSearchName = store.state.publicAccountSearchName
       ..pageOffset = searchState.pageOffset
       ..textEditingController = searchState.textEditingController
       ..scrollController = searchState.scrollController

@@ -4,17 +4,17 @@ import 'package:flutterwanandroid/app_router.dart';
 import 'package:flutterwanandroid/custom_widget/dialog/loading_dialog.dart';
 import 'package:flutterwanandroid/custom_widget/load_more.dart';
 import 'package:flutterwanandroid/custom_widget/page_show_widget.dart';
-import 'package:flutterwanandroid/module/public_account/history_list_module.dart';
+import 'package:flutterwanandroid/module/project/project_list_module.dart';
 import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/style/app_colors.dart';
 import 'package:flutterwanandroid/style/app_constent_padding.dart';
 import 'package:flutterwanandroid/style/app_text_style.dart';
-import 'package:flutterwanandroid/ui/public_account/services/public_account_services.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
+import 'package:flutterwanandroid/utils/image_utils.dart';
 import 'package:flutterwanandroid/utils/router_utils.dart';
 
-class PublicAccountHistoryListScreen extends StatefulWidget {
-  PublicAccountHistoryListScreen({
+class ProjectListScreen extends StatefulWidget {
+  ProjectListScreen({
     Key key,
     @required this.chapterId,
     @required this.dio,
@@ -23,27 +23,25 @@ class PublicAccountHistoryListScreen extends StatefulWidget {
   final Dio dio;
 
   @override
-  State<StatefulWidget> createState() => _PublicAccountHistoryListScreenState();
+  State<StatefulWidget> createState() => ProjectListScreenState();
 }
 
-class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryListScreen> {
-  DataLoadStatus publicAccountHistoryStatus;
+class ProjectListScreenState extends State<ProjectListScreen> {
+  DataLoadStatus projectLoadStatus;
   ScrollController scrollController;
-  PublicAccountHistoryListModule publicAccountHistoryListModule;
   bool isPerformingRequest;
   int pageOffset;
-  PublicAccountPageService publicAccountPageService;
   int chapterId;
   Map<int, bool> collects;
+  var projects = <Projects>[];
 
   @override
   void initState() {
-    publicAccountHistoryStatus = DataLoadStatus.loading;
+    projectLoadStatus = DataLoadStatus.loading;
     isPerformingRequest = false;
     chapterId = widget.chapterId;
     pageOffset = 1;
     scrollController = ScrollController();
-    publicAccountPageService = PublicAccountPageService(dio: widget.dio);
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if (!isPerformingRequest) {
@@ -52,31 +50,28 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
       }
     });
     super.initState();
-    refreshHistoryData(0);
+    refreshHistoryData(1);
   }
 
-  void refreshHistoryData(int pageOffset) async {
+  void refreshHistoryData(int index) async {
     try {
-      var historyData = await publicAccountPageService.getPublicAccountHistoryActicles(chapterId, pageOffset);
-      if (historyData == null) {
-        publicAccountHistoryStatus = DataLoadStatus.empty;
-      } else if (historyData.errorCode < 0) {
-        publicAccountHistoryStatus = DataLoadStatus.failure;
+      var projectsResponse = await widget.dio.get<Map<String, dynamic>>(NetPath.getProjects(index));
+      var projectListResponseModule = ProjectListResponseModule.fromJson(projectsResponse.data);
+      if (projectListResponseModule == null ||
+          projectListResponseModule.projectListData == null ||
+          projectListResponseModule.projectListData.projects == null ||
+          projectListResponseModule.projectListData.projects.isEmpty) {
+        projectLoadStatus = DataLoadStatus.empty;
+      } else if (projectListResponseModule.errorCode < 0) {
+        projectLoadStatus = DataLoadStatus.failure;
       } else {
-        publicAccountHistoryListModule = historyData;
-        publicAccountHistoryStatus = DataLoadStatus.loadCompleted;
+        projects = projectListResponseModule.projectListData.projects;
+        projectLoadStatus = DataLoadStatus.loadCompleted;
         pageOffset = 2;
       }
       setState(() {});
-    } on DioError catch (e) {
-      print('PublicAccountHistoryListScreen Dio Error::${e.message}');
-      publicAccountHistoryStatus = DataLoadStatus.failure;
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
     } catch (e) {
-      publicAccountHistoryStatus = DataLoadStatus.failure;
+      projectLoadStatus = DataLoadStatus.failure;
       if (!mounted) {
         return;
       }
@@ -90,10 +85,13 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
         isPerformingRequest = true;
       });
       try {
-        var historyData = await publicAccountPageService.getHistoryMoreData(publicAccountHistoryListModule, chapterId, pageOffset);
-
+        var projectsMoreResponse = await widget.dio.get<Map<String, dynamic>>(NetPath.getProjects(pageOffset));
+        var projectListResponseMoreModule = ProjectListResponseModule.fromJson(projectsMoreResponse.data);
         Future.delayed(const Duration(microseconds: 500), () {
-          if (historyData == null) {
+          if (projectListResponseMoreModule == null ||
+              projectListResponseMoreModule.projectListData == null ||
+              projectListResponseMoreModule.projectListData.projects == null ||
+              projectListResponseMoreModule.projectListData.projects.isEmpty) {
             var edge = 72;
             var offsetFromBottom =
                 // ignore: invalid_use_of_protected_member
@@ -104,10 +102,10 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
               scrollController.animateTo(scrollController.offset - (edge - offsetFromBottom),
                   duration: Duration(milliseconds: 500), curve: Curves.easeOut);
             }
-            historyData = publicAccountHistoryListModule;
+          } else {
+            projects.addAll(projectListResponseMoreModule.projectListData.projects);
+            pageOffset++;
           }
-          publicAccountHistoryListModule = historyData;
-          pageOffset++;
           isPerformingRequest = false;
           setState(() {});
         });
@@ -141,14 +139,14 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
   @override
   Widget build(BuildContext context) {
     return PageLoadWidget(
-      dataLoadStatus: publicAccountHistoryStatus,
+      dataLoadStatus: projectLoadStatus,
       itemBuilder: (context, index) {
-        if (index == publicAccountHistoryListModule.historyListData.datas.length) {
+        if (index == projects.length) {
           return _buildLoadMore();
         }
         return _buildHistoryItem(index);
       },
-      itemCount: _buildItemCount(),
+      itemCount: projects.length + 1,
       scrollController: scrollController,
       onRefresh: () async {
         showLoadingView();
@@ -162,6 +160,11 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
     );
   }
 
+  void showLoadingView() {
+    projectLoadStatus = DataLoadStatus.loading;
+    setState(() {});
+  }
+
   Widget _buildLoadMore() {
     return Opacity(
       opacity: isPerformingRequest ? 1.0 : 0.0,
@@ -170,49 +173,60 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
   }
 
   Widget _buildHistoryItem(int index) {
-    var historyItem = publicAccountHistoryListModule.historyListData.datas[index];
+    var projectItem = projects[index];
     var isCurrentCollect = collects == null ? null : collects[index];
-    var isCollect = isCurrentCollect ?? historyItem.collect ?? false;
+    var isCollect = isCurrentCollect ?? projectItem.collect ?? false;
     return Container(
       color: AppColors.white,
       padding: EdgeInsets.all(8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildCollectWidget(isCollect ?? false, index, historyItem),
+          _buildCollectWidget(isCollect ?? false, index, projectItem),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              _buildArticleTitle(historyItem.title, historyItem),
+              _buildArticleTitle(projectItem.title, projectItem),
               Padding(
                 padding: edge16_8,
-                child: _buildTimeInfo(historyItem.niceDate),
+                child: _buildSubjectTitle(projectItem.desc),
+              ),
+              Padding(
+                padding: edge16_8,
+                child: _buildTimeAndNameInfo(projectItem.niceDate, projectItem.author),
               ),
             ],
-          ))
+          )),
+          FadeInImage.assetNetwork(
+            placeholder: getAssetsImage(),
+            image: projectItem.envelopePic,
+            width: MediaQuery.of(context).size.width,
+            height: 75.0,
+            fit: BoxFit.fill,
+          ),
         ],
       ),
     );
   }
 
-  IconButton _buildCollectWidget(bool collect, int index, HistoryDatas historyItem) {
+  IconButton _buildCollectWidget(bool collect, int index, Projects projectItem) {
     return IconButton(
         icon: Icon(
           collect ? Icons.favorite : Icons.favorite_border,
           color: Colors.red,
         ),
         onPressed: () {
-          _upDateCollect(context, !collect, index, historyItem);
+          _upDateCollect(context, !collect, index, projectItem);
         });
   }
 
-  Widget _buildArticleTitle(String title, HistoryDatas historyItem) {
+  Widget _buildArticleTitle(String title, Projects project) {
     return GestureDetector(
       onTap: () {
         var params = <String, dynamic>{};
-        params[webTitle] = historyItem.title;
-        params[webUrlKey] = historyItem.link;
+        params[webTitle] = project.title;
+        params[webUrlKey] = project.link;
         RouterUtil.pushName(context, AppRouter.webRouterName, params: params);
       },
       child: Padding(
@@ -227,44 +241,10 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
     );
   }
 
-  Widget _buildTimeInfo(String niceDate) {
-    return Padding(
-      padding: edgeRight_8,
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 4),
-            child: Text(
-              '时间:',
-              style: AppTextStyle.caption(color: AppColors.lightGrey2),
-            ),
-          ),
-          Expanded(
-              child: Text(
-            niceDate,
-            style: AppTextStyle.caption(color: AppColors.lightGrey2),
-          )),
-        ],
-      ),
-    );
-  }
-
-  int _buildItemCount() {
-    if (publicAccountHistoryListModule != null) {
-      return publicAccountHistoryListModule.historyListData.datas.length + 1;
-    }
-    return 1;
-  }
-
-  void showLoadingView() {
-    publicAccountHistoryStatus = DataLoadStatus.loading;
-    setState(() {});
-  }
-
-  void _upDateCollect(BuildContext context, bool collect, int index, HistoryDatas historyItem) async {
+  void _upDateCollect(BuildContext context, bool collect, int index, Projects projectItem) async {
     try {
       showLoadingDialog<dynamic>(context);
-      var id = historyItem.id;
+      var id = projectItem.id;
       Response response;
       if (collect) {
         response = await widget.dio.post<Map<String, dynamic>>(NetPath.collectArticle(id));
@@ -285,5 +265,35 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
     } catch (e) {
       dismissDialog<void>(context);
     }
+  }
+
+  Widget _buildSubjectTitle(String desc) {
+    return Text(
+      desc ?? '',
+      style: AppTextStyle.caption(color: AppColors.lightGrey2, fontSize: 14),
+      maxLines: 6,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  Widget _buildTimeAndNameInfo(String niceDate, String author) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+            flex: 2,
+            child: Padding(
+              padding: EdgeInsets.only(right: 8),
+              child: Text(
+                niceDate ?? '',
+                style: AppTextStyle.caption(color: AppColors.lightGrey2),
+              ),
+            )),
+        Expanded(
+            child: Text(
+          author ?? '',
+          style: AppTextStyle.caption(color: AppColors.lightGrey2),
+        )),
+      ],
+    );
   }
 }
