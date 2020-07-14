@@ -27,6 +27,10 @@ import 'package:flutterwanandroid/ui/search/redux/search_state.dart';
 import 'package:flutterwanandroid/ui/search/search_page.dart';
 import 'package:flutterwanandroid/ui/splash/splash_page.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
+import 'package:flutterwanandroid/ui/system/reducer/system_state.dart';
+import 'package:flutterwanandroid/ui/system/system_list/reducer/system_list_state.dart';
+import 'package:flutterwanandroid/ui/system/system_list/system_list_screen.dart';
+import 'package:flutterwanandroid/ui/system/system_page.dart';
 import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_state.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_state.dart';
 import 'package:flutterwanandroid/ui/web/web_view_widget.dart';
@@ -73,6 +77,12 @@ Future<Widget> buildAppWidget() async {
               ));
             case AppRouter.project:
               return SlideRightRoute<void>(page: ProjectPage());
+            case AppRouter.system:
+              return SlideRightRoute<void>(page: SystemPage());
+            case AppRouter.systemList:
+              var params = routeSettings.arguments as Map<String, dynamic>;
+              return SlideRightRoute<void>(
+                  page: SystemListScreen(id: params[systemListIdKey] as int, title: params[systemListTitleKey] as String));
             case AppRouter.search:
               var params = routeSettings.arguments as Map<String, dynamic>;
               return MaterialPageRoute<void>(builder: (context) {
@@ -109,6 +119,8 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       navigationState: NavigationState(),
       searchState: SearchState(),
       projectState: ProjectState(),
+      systemState: SystemState(),
+      systemListState: SystemListState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

@@ -111,6 +111,7 @@ class LoginScreen extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBassTextField.password(
+            maxLines: 1,
             isShowPassword: viewModule.isShowPassword,
             controller: viewModule.controllerPassWord,
             focusNode: viewModule.editPasswordFocusNode,

@@ -13,6 +13,8 @@ import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_reducer.dart';
 import 'package:flutterwanandroid/ui/search/redux/search_reducer.dart';
 import 'package:flutterwanandroid/ui/splash/splash_reducer.dart';
+import 'package:flutterwanandroid/ui/system/reducer/system_reducer.dart';
+import 'package:flutterwanandroid/ui/system/system_list/reducer/system_list_reducer.dart';
 import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_reducer.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_reducer.dart';
 import 'package:flutterwanandroid/utils/dialog_manager.dart';
@@ -49,5 +51,7 @@ AppState appReducer(AppState state, dynamic action) {
     ..todoState = todoReducer(state.todoState, action)
     ..authorState = authorReducer(state.authorState, action)
     ..searchState = searchReducer(state.searchState, action)
-    ..projectState = projectReducer(state.projectState, action);
+    ..projectState = projectReducer(state.projectState, action)
+    ..systemState = systemReducer(state.systemState, action)
+    ..systemListState = systemListReducer(state.systemListState, action);
 }

@@ -16,6 +16,8 @@ import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/search/redux/search_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
+import 'package:flutterwanandroid/ui/system/reducer/system_state.dart';
+import 'package:flutterwanandroid/ui/system/system_list/reducer/system_list_state.dart';
 import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_state.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_state.dart';
 
@@ -40,6 +42,8 @@ class AppState implements Cloneable<AppState> {
     this.publicAccountTabIndex,
     this.publicAccountSearchName,
     this.projectState,
+    this.systemState,
+    this.systemListState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -72,6 +76,8 @@ class AppState implements Cloneable<AppState> {
   int publicAccountTabIndex;
   String publicAccountSearchName;
   ProjectState projectState;
+  SystemState systemState;
+  SystemListState systemListState;
 
   @override
   AppState clone() {
@@ -97,6 +103,8 @@ class AppState implements Cloneable<AppState> {
       ..publicAccountTabIndex = publicAccountTabIndex
       ..publicAccountSearchName = publicAccountSearchName
       ..authorState = authorState
-      ..projectState = projectState;
+      ..projectState = projectState
+      ..systemState = systemState
+      ..systemListState = systemListState;
   }
 }

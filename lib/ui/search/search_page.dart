@@ -164,7 +164,7 @@ class SearchPage extends StatelessWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: builerTags(vm),
+                child: builderTags(vm),
               ),
               SliverToBoxAdapter(
                 child: _buildHistoryInfo(vm),
@@ -189,7 +189,7 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  Widget builerTags(SearchViewModule vm) {
+  Widget builderTags(SearchViewModule vm) {
     return Wrap(
       spacing: 4.0,
       alignment: WrapAlignment.start,
@@ -205,13 +205,13 @@ class SearchPage extends StatelessWidget {
     for (var i = 0; i < vm.searchHotKeyResponseModule.hotKey.length; i++) {
       var tag = vm.searchHotKeyResponseModule.hotKey[i].name;
       var color = getAssetsColor();
-      var gestureDetector = _buildeGesTag(tag, color, vm);
+      var gestureDetector = _builderGesTag(tag, color, vm);
       widgets.add(gestureDetector);
     }
     return widgets;
   }
 
-  Widget _buildeGesTag(String tag, Color color, SearchViewModule vm) {
+  Widget _builderGesTag(String tag, Color color, SearchViewModule vm) {
     return GestureDetector(
       child: Chip(
         label: Text(

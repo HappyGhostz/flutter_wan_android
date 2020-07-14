@@ -30,11 +30,15 @@ class MyPage extends StatelessWidget {
             slivers: <Widget>[
               _buildMyMessageWidget(vm, context),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.build, title: '项目'),
+                child: _buildRowItem(context, itemIcon: Icons.build, title: '项目', onTap: () {
+                  vm.pushPage(context, AppRouter.project);
+                }),
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.category, title: '体系'),
+                child: _buildRowItem(context, itemIcon: Icons.category, title: '体系', onTap: () {
+                  vm.pushPage(context, AppRouter.system);
+                }),
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(
@@ -110,11 +114,9 @@ class MyPage extends StatelessWidget {
     store.dispatch(updateMyShareDataAction());
   }
 
-  Widget _buildRowItem(BuildContext context, {IconData itemIcon, String title}) {
+  Widget _buildRowItem(BuildContext context, {IconData itemIcon, String title, Function() onTap}) {
     return GestureDetector(
-      onTap: () {
-        RouterUtil.pushName(context, AppRouter.project);
-      },
+      onTap: onTap,
       child: Row(
         children: <Widget>[
           Container(

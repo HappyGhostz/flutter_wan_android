@@ -55,7 +55,8 @@ class ProjectListScreenState extends State<ProjectListScreen> {
 
   void refreshHistoryData(int index) async {
     try {
-      var projectsResponse = await widget.dio.get<Map<String, dynamic>>(NetPath.getProjects(index));
+      var projectsResponse =
+          await widget.dio.get<Map<String, dynamic>>(NetPath.getProjects(index), queryParameters: <String, dynamic>{'cid': chapterId});
       var projectListResponseModule = ProjectListResponseModule.fromJson(projectsResponse.data);
       if (projectListResponseModule == null ||
           projectListResponseModule.projectListData == null ||
@@ -198,12 +199,15 @@ class ProjectListScreenState extends State<ProjectListScreen> {
               ),
             ],
           )),
-          FadeInImage.assetNetwork(
-            placeholder: getAssetsImage(),
-            image: projectItem.envelopePic,
-            width: MediaQuery.of(context).size.width,
-            height: 75.0,
-            fit: BoxFit.fill,
+          SizedBox(
+            width: 72,
+            child: FadeInImage.assetNetwork(
+              placeholder: getAssetsImage(),
+              image: projectItem.envelopePic,
+              width: MediaQuery.of(context).size.width,
+              height: 75.0,
+              fit: BoxFit.fill,
+            ),
           ),
         ],
       ),

@@ -6,4 +6,6 @@ class AppRouter {
   static const String authorArticleRouterName = '/authorArticle';
   static const String search = '/search';
   static const String project = '/project';
+  static const String system = '/system';
+  static const String systemList = '/systemList';
 }

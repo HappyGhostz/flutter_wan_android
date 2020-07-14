@@ -11,6 +11,8 @@ String editTimeKey = 'timeKey';
 String authorKey = 'authorKey';
 String searchHistoryKey = 'search-history';
 String homeCurrentIndexKey = 'homeCurrentIndexKey-history';
+String systemListIdKey = 'systemListIdKey';
+String systemListTitleKey = 'systemListTitleKey';
 
 var dioErrorValue = <DioErrorType, String>{
   DioErrorType.CANCEL: '网络请求被取消!',

@@ -5,6 +5,7 @@ import 'package:flutterwanandroid/module/my_page/my_integral_module.dart';
 import 'package:flutterwanandroid/module/my_page/my_share_module.dart';
 import 'package:flutterwanandroid/module/my_page/web_collect_module.dart';
 import 'package:flutterwanandroid/ui/my_page/redux/my_page_action.dart';
+import 'package:flutterwanandroid/utils/router_utils.dart';
 import 'package:redux/redux.dart';
 
 class MyViewModule {
@@ -29,6 +30,7 @@ class MyViewModule {
   MyShareModule myShareModule;
   Function() refresh;
   Function(BuildContext context) logout;
+  Function(BuildContext context, String routeName) pushPage;
 
   static MyViewModule fromStore(Store<AppState> store) {
     var state = store.state.myState;
@@ -50,6 +52,7 @@ class MyViewModule {
       }
       ..logout = (context) {
         store.dispatch(logoutAction(context));
-      };
+      }
+      ..pushPage = RouterUtil.pushName;
   }
 }

@@ -111,6 +111,7 @@ class SignInScreen extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBassTextField.password(
+            maxLines: 1,
             isShowPassword: viewModule.isShowPassword,
             controller: viewModule.controllerSignInPassWord,
             focusNode: viewModule.editConfirmSignInPasswordFocusNode,
@@ -164,6 +165,7 @@ class SignInScreen extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBassTextField.password(
+            maxLines: 1,
             isShowPassword: viewModule.isShowPassword,
             controller: viewModule.controllerConfirmPassWord,
             focusNode: viewModule.editConfirmPasswordFocusNode,

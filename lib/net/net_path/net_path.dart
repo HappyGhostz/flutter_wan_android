@@ -13,6 +13,7 @@ class NetPath {
   static const ADD_TODO = '/lg/todo/add/json';
   static const HOT_KEY = '//hotkey/json';
   static const PROJECT_TAB = '/project/tree/json';
+  static const SYSTEM_TREE = '/tree/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';

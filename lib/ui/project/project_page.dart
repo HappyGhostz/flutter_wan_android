@@ -5,6 +5,7 @@ import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/custom_widget/keep_alive_widget.dart';
 import 'package:flutterwanandroid/custom_widget/loading/load_error_page.dart';
 import 'package:flutterwanandroid/custom_widget/tab_controller_widget.dart';
+import 'package:flutterwanandroid/ui/project/project_list_screen.dart';
 import 'package:flutterwanandroid/ui/project/project_view_module.dart';
 import 'package:flutterwanandroid/ui/project/reducer/project_action.dart';
 
@@ -17,22 +18,26 @@ class ProjectPage extends StatelessWidget {
         store.dispatch(initTabBarData());
       },
       builder: (context, vm) {
-        if (vm.projectTabData == null || vm.projectTabData.isEmpty) {
-          return ErrorPage(tapGestureRecognizer: TapGestureRecognizer()..onTap = () {});
-        }
         return Scaffold(
           appBar: AppBar(
             title: Text('项目'),
           ),
-          body: Container(
-            child: TabControllerWidget(
-              tabChildren: _buildTabs(vm),
-              tabBarViews: _buildTabBarViews(vm, context),
-              changeTabIndex: (index) {},
-            ),
-          ),
+          body: _buildProjectContainer(vm, context),
         );
       },
+    );
+  }
+
+  Widget _buildProjectContainer(ProjectViewModule vm, BuildContext context) {
+    if (vm.projectTabData == null || vm.projectTabData.isEmpty) {
+      return ErrorPage(tapGestureRecognizer: TapGestureRecognizer()..onTap = () {});
+    }
+    return Container(
+      child: TabControllerWidget(
+        tabChildren: _buildTabs(vm),
+        tabBarViews: _buildTabBarViews(vm, context),
+        changeTabIndex: (index) {},
+      ),
     );
   }
 
@@ -61,7 +66,10 @@ class ProjectPage extends StatelessWidget {
     for (var i = 0; i < tabDatas.length; i++) {
       var tabData = tabDatas[i];
       tabs.add(KeepAliveWidget(
-        child: Container(),
+        child: ProjectListScreen(
+          chapterId: tabData.id,
+          dio: dio,
+        ),
       ));
     }
     return tabs;
