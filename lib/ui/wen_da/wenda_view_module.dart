@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/app_router.dart';
-import 'package:flutterwanandroid/module/system/system_list_module.dart';
-import 'package:flutterwanandroid/ui/system/system_list/reducer/system_list_action.dart';
+import 'package:flutterwanandroid/module/wenda/wen_da_module.dart';
+import 'package:flutterwanandroid/ui/wen_da/reducer/wen_da_action.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
 import 'package:flutterwanandroid/utils/router_utils.dart';
 import 'package:redux/redux.dart';
 
-class SystemListViewModule {
-  SystemListViewModule({
+class WendaViewModule {
+  WendaViewModule({
     this.dataLoadStatus,
     this.pageOffset,
     this.scrollController,
@@ -17,40 +17,40 @@ class SystemListViewModule {
     this.collectIndexs,
     this.updateCollectAction,
     this.goToAuthor,
-    this.goToArticle,
-    this.systemLists,
+    this.wendaLists,
   });
+
   DataLoadStatus dataLoadStatus;
-  List<SystemList> systemLists;
   int pageOffset;
   ScrollController scrollController;
-  Function(int id, int index) refreshData;
+  Function(int index) refreshData;
   bool isPerformingRequest;
   Map<int, bool> collectIndexs;
   Function(BuildContext context, bool isCollect, int index) updateCollectAction;
-  Function(BuildContext context, SystemList systemListItem) goToArticle;
+  Function(BuildContext context, WendaModule wendaModule) goToArticle;
   Function(BuildContext context, String author) goToAuthor;
+  List<WendaModule> wendaLists;
 
-  static SystemListViewModule fromStore(Store<AppState> store) {
-    var state = store.state.systemListState;
-    return SystemListViewModule()
+  static WendaViewModule fromStore(Store<AppState> store) {
+    var state = store.state.wendaState;
+    return WendaViewModule()
       ..dataLoadStatus = state.dataLoadStatus ?? DataLoadStatus.loading
       ..pageOffset = state.pageOffset ?? 0
       ..isPerformingRequest = state.isPerformingRequest ?? false
-      ..systemLists = state.systemLists
+      ..wendaLists = state.wendaLists
       ..scrollController = state.scrollController
       ..collectIndexs = state.collectIndexs
-      ..refreshData = (id, index) {
-        store.dispatch(UpdateSystemListDataStatusAction(dataLoadStatus: DataLoadStatus.loading));
-        store.dispatch(loadSystemListDataAction(id, 0));
+      ..refreshData = (index) {
+        store.dispatch(UpdateWendaListDataStatusAction(dataLoadStatus: DataLoadStatus.loading));
+        store.dispatch(loadWendaListDataAction(1));
       }
       ..updateCollectAction = (context, isCollect, index) {
         store.dispatch(changeTheCollectStatusAction(context, index, isCollect: isCollect));
       }
-      ..goToArticle = (context, systemListItem) {
+      ..goToArticle = (context, wendaModule) {
         var params = <String, dynamic>{};
-        params[webTitle] = systemListItem.title;
-        params[webUrlKey] = systemListItem.link;
+        params[webTitle] = wendaModule.title;
+        params[webUrlKey] = wendaModule.link;
         RouterUtil.pushName(context, AppRouter.webRouterName, params: params);
       }
       ..goToAuthor = (context, name) {

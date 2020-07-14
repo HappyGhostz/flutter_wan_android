@@ -20,6 +20,7 @@ import 'package:flutterwanandroid/ui/system/reducer/system_state.dart';
 import 'package:flutterwanandroid/ui/system/system_list/reducer/system_list_state.dart';
 import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_state.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_state.dart';
+import 'package:flutterwanandroid/ui/wen_da/reducer/wen_da_state.dart';
 
 class AppState implements Cloneable<AppState> {
   AppState({
@@ -44,6 +45,7 @@ class AppState implements Cloneable<AppState> {
     this.projectState,
     this.systemState,
     this.systemListState,
+    this.wendaState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -78,6 +80,7 @@ class AppState implements Cloneable<AppState> {
   ProjectState projectState;
   SystemState systemState;
   SystemListState systemListState;
+  WendaState wendaState;
 
   @override
   AppState clone() {
@@ -105,6 +108,7 @@ class AppState implements Cloneable<AppState> {
       ..authorState = authorState
       ..projectState = projectState
       ..systemState = systemState
-      ..systemListState = systemListState;
+      ..systemListState = systemListState
+      ..wendaState = wendaState;
   }
 }

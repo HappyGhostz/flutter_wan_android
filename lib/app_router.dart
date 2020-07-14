@@ -8,4 +8,5 @@ class AppRouter {
   static const String project = '/project';
   static const String system = '/system';
   static const String systemList = '/systemList';
+  static const String wenda = '/wenda';
 }

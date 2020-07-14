@@ -34,6 +34,8 @@ import 'package:flutterwanandroid/ui/system/system_page.dart';
 import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_state.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_state.dart';
 import 'package:flutterwanandroid/ui/web/web_view_widget.dart';
+import 'package:flutterwanandroid/ui/wen_da/reducer/wen_da_state.dart';
+import 'package:flutterwanandroid/ui/wen_da/wen_da_screen.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:redux/redux.dart';
@@ -79,6 +81,8 @@ Future<Widget> buildAppWidget() async {
               return SlideRightRoute<void>(page: ProjectPage());
             case AppRouter.system:
               return SlideRightRoute<void>(page: SystemPage());
+            case AppRouter.wenda:
+              return SlideRightRoute<void>(page: WendaScreen());
             case AppRouter.systemList:
               var params = routeSettings.arguments as Map<String, dynamic>;
               return SlideRightRoute<void>(
@@ -121,6 +125,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       projectState: ProjectState(),
       systemState: SystemState(),
       systemListState: SystemListState(),
+      wendaState: WendaState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

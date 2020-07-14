@@ -76,4 +76,8 @@ class NetPath {
   static String getProjects(int index) {
     return '/project/list/$index/json';
   }
+
+  static String getWenda(int index) {
+    return '/wenda/list/$index/json';
+  }
 }

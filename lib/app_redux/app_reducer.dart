@@ -17,6 +17,7 @@ import 'package:flutterwanandroid/ui/system/reducer/system_reducer.dart';
 import 'package:flutterwanandroid/ui/system/system_list/reducer/system_list_reducer.dart';
 import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_reducer.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_reducer.dart';
+import 'package:flutterwanandroid/ui/wen_da/reducer/wen_da_reducer.dart';
 import 'package:flutterwanandroid/utils/dialog_manager.dart';
 
 AppState appReducer(AppState state, dynamic action) {
@@ -53,5 +54,6 @@ AppState appReducer(AppState state, dynamic action) {
     ..searchState = searchReducer(state.searchState, action)
     ..projectState = projectReducer(state.projectState, action)
     ..systemState = systemReducer(state.systemState, action)
-    ..systemListState = systemListReducer(state.systemListState, action);
+    ..systemListState = systemListReducer(state.systemListState, action)
+    ..wendaState = wendaReducer(state.wendaState, action);
 }

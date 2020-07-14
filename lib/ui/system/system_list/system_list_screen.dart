@@ -24,14 +24,15 @@ class SystemListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, SystemListViewModule>(
         onInit: (store) {
-          var state = store.state.systemListState;
-          state.scrollController = ScrollController();
-          state.isPerformingRequest = false;
-          state.dataLoadStatus = DataLoadStatus.loading;
-          state.scrollController.addListener(() {
-            if (state.scrollController.position.pixels == state.scrollController.position.maxScrollExtent) {
-              if (!state.isPerformingRequest) {
-                store.dispatch(loadMoreAction(id, state.pageOffset));
+          store.state.systemListState.scrollController = ScrollController();
+          store.state.systemListState.isPerformingRequest = false;
+          store.state.systemListState.pageOffset = 0;
+          store.state.systemListState.dataLoadStatus = DataLoadStatus.loading;
+          store.state.systemListState.scrollController.addListener(() {
+            if (store.state.systemListState.scrollController.position.pixels ==
+                store.state.systemListState.scrollController.position.maxScrollExtent) {
+              if (!store.state.systemListState.isPerformingRequest) {
+                store.dispatch(loadMoreAction(store.state.systemListState.systemLists, id, store.state.systemListState.pageOffset));
               }
             }
           });

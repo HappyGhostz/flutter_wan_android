@@ -72,7 +72,7 @@ class UpdateSystemListLoadMoreDataAction {
   int pageOffset;
 }
 
-ThunkAction<AppState> loadMoreAction(int id, int index) {
+ThunkAction<AppState> loadMoreAction(List<SystemList> systemLists, int id, int index) {
   return (Store<AppState> store) async {
     try {
       store.dispatch(UpdateIsPerformingRequestAction(isPerformingRequest: true));
@@ -97,9 +97,8 @@ ThunkAction<AppState> loadMoreAction(int id, int index) {
           }
           store.dispatch(UpdateIsPerformingRequestAction(isPerformingRequest: false));
         } else {
-          store.state.systemListState.systemLists.addAll(systemListModule.systemListModule.systemLists);
-          store.dispatch(UpdateSystemListLoadMoreDataAction(
-              isPerformingRequest: false, systemLists: store.state.systemListState.systemLists, pageOffset: index + 1));
+          systemLists.addAll(systemListModule.systemListModule.systemLists);
+          store.dispatch(UpdateSystemListLoadMoreDataAction(isPerformingRequest: false, systemLists: systemLists, pageOffset: index + 1));
         }
       });
     } catch (e) {
