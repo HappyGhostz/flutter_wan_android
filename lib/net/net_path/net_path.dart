@@ -80,4 +80,8 @@ class NetPath {
   static String getWenda(int index) {
     return '/wenda/list/$index/json';
   }
+
+  static String getIntegralRank(int index) {
+    return '/coin/rank/$index/json';
+  }
 }

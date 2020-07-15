@@ -8,6 +8,7 @@ import 'package:flutterwanandroid/type/clone.dart';
 import 'package:flutterwanandroid/ui/author/redux/author_state.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
+import 'package:flutterwanandroid/ui/integral/integral_rank/reducer/integral_rank_state.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_state.dart';
 import 'package:flutterwanandroid/ui/my_page/redux/my_state.dart';
 import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_state.dart';
@@ -46,6 +47,7 @@ class AppState implements Cloneable<AppState> {
     this.systemState,
     this.systemListState,
     this.wendaState,
+    this.integralRankState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -81,6 +83,7 @@ class AppState implements Cloneable<AppState> {
   SystemState systemState;
   SystemListState systemListState;
   WendaState wendaState;
+  IntegralRankState integralRankState;
 
   @override
   AppState clone() {
@@ -109,6 +112,7 @@ class AppState implements Cloneable<AppState> {
       ..projectState = projectState
       ..systemState = systemState
       ..systemListState = systemListState
-      ..wendaState = wendaState;
+      ..wendaState = wendaState
+      ..integralRankState = integralRankState;
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutterwanandroid/app_router.dart';
 import 'package:flutterwanandroid/ui/author/redux/author_reducer.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_reducer.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_reducer.dart';
+import 'package:flutterwanandroid/ui/integral/integral_rank/reducer/integral_rank_reducer.dart';
 import 'package:flutterwanandroid/ui/login_signin/login_reducer.dart';
 import 'package:flutterwanandroid/ui/my_page/redux/my_reducer.dart';
 import 'package:flutterwanandroid/ui/navigation_page/redux/navigation_reducer.dart';
@@ -55,5 +56,6 @@ AppState appReducer(AppState state, dynamic action) {
     ..projectState = projectReducer(state.projectState, action)
     ..systemState = systemReducer(state.systemState, action)
     ..systemListState = systemListReducer(state.systemListState, action)
-    ..wendaState = wendaReducer(state.wendaState, action);
+    ..wendaState = wendaReducer(state.wendaState, action)
+    ..integralRankState = integralRankReducer(state.integralRankState, action);
 }
