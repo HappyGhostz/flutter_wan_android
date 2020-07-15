@@ -77,7 +77,9 @@ class IntegralRankScreen extends StatelessWidget {
       color: AppColors.white,
       padding: EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          vm.pushIntegralPrivatePage(context, integralRankItem.userId);
+        },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[

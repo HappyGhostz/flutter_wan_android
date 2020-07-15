@@ -84,4 +84,12 @@ class NetPath {
   static String getIntegralRank(int index) {
     return '/coin/rank/$index/json';
   }
+
+  static String getIntegralPrivate(int index) {
+    return '//lg/coin/list/$index/json';
+  }
+
+  static String getUserIntegralPrivate(int userId, int index) {
+    return '/coin/list/$userId/$index/json';
+  }
 }

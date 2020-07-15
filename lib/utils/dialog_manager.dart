@@ -4,6 +4,7 @@ import 'package:flutterwanandroid/custom_widget/dialog/dialog.dart';
 import 'package:flutterwanandroid/custom_widget/dialog/edit_dialog.dart';
 import 'package:flutterwanandroid/custom_widget/dialog/error_dialog.dart';
 import 'package:flutterwanandroid/custom_widget/dialog/info_dialog.dart';
+import 'package:flutterwanandroid/custom_widget/dialog/login_dialog.dart';
 
 void showDioErrorInfo(BuildContext context, DioError dioError, {Function() onClick}) {
   showAppDialog<void>(
@@ -39,6 +40,13 @@ void showInfoDialog(BuildContext context, String content, Function() onClick) {
         content: content,
         onClick: onClick ?? () {},
       ));
+}
+
+void showLoginDialog(BuildContext context) {
+  showAppDialog<void>(
+    context: context,
+    child: LoginInfoDialog(),
+  );
 }
 
 Future<Map<String, String>> showEditDialog(

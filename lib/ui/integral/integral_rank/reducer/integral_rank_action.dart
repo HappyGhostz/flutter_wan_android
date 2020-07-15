@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
-import 'package:flutterwanandroid/module/integral_rank/integral_rank_module.dart';
+import 'package:flutterwanandroid/module/integral/integral_rank_module.dart';
 import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
 import 'package:redux/redux.dart';

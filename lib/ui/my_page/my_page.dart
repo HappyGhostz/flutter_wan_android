@@ -54,7 +54,9 @@ class MyPage extends StatelessWidget {
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.person_add, title: '个人积分获取'),
+                child: _buildRowItem(context, itemIcon: Icons.person_add, title: '个人积分获取', onTap: () {
+                  vm.pushIntegralPrivatePage(context, AppRouter.integralPrivate);
+                }),
               ),
               _buildDivider(title: '收藏', padding: EdgeInsets.only(top: 4, right: 4, left: 8, bottom: 4)),
               SliverToBoxAdapter(

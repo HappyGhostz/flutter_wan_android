@@ -10,4 +10,5 @@ class AppRouter {
   static const String systemList = '/systemList';
   static const String wenda = '/wenda';
   static const String integralRank = '/integralRank';
+  static const String integralPrivate = '/integralPrivate';
 }
