@@ -11,4 +11,5 @@ class AppRouter {
   static const String wenda = '/wenda';
   static const String integralRank = '/integralRank';
   static const String integralPrivate = '/integralPrivate';
+  static const String collectArticle = '/collectArticle';
 }

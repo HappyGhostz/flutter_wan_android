@@ -36,6 +36,9 @@ class IntegralPrivateScreen extends StatelessWidget {
           });
           store.dispatch(loadIntegralPrivateListDataAction(1, id: userId));
         },
+        onDispose: (store) {
+          store.state.integralPrivateState.scrollController.dispose();
+        },
         converter: IntegralPrivateViewModule.fromStore,
         builder: (context, vm) {
           return Scaffold(

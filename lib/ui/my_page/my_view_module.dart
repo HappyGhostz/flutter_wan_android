@@ -33,7 +33,7 @@ class MyViewModule {
   Function() refresh;
   Function(BuildContext context) logout;
   Function(BuildContext context, String routeName) pushPage;
-  Function(BuildContext context, String routeName) pushIntegralPrivatePage;
+  Function(BuildContext context, String routeName) pushAfterLoginPage;
 
   static MyViewModule fromStore(Store<AppState> store) {
     var state = store.state.myState;
@@ -57,7 +57,7 @@ class MyViewModule {
         store.dispatch(logoutAction(context));
       }
       ..pushPage = RouterUtil.pushName
-      ..pushIntegralPrivatePage = (context, name) {
+      ..pushAfterLoginPage = (context, name) {
         try {
           var cookies = store.state.cookJar.loadForRequest(Uri.parse('${NetPath.APP_BASE_URL}${NetPath.LOG_IN}'));
           if (cookies != null && cookies.length >= 2) {

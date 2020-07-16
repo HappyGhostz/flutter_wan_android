@@ -29,6 +29,9 @@ class IntegralRankScreen extends StatelessWidget {
           });
           store.dispatch(loadIntegralRankListDataAction(1));
         },
+        onDispose: (store) {
+          store.state.integralRankState.scrollController.dispose();
+        },
         converter: IntegralRankViewModule.fromStore,
         builder: (context, vm) {
           return Scaffold(

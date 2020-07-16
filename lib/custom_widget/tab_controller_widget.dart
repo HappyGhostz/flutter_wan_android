@@ -34,6 +34,12 @@ class _TabControllerWidgetState extends State<TabControllerWidget> with TickerPr
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[

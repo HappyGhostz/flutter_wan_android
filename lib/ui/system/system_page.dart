@@ -25,6 +25,9 @@ class SystemPage extends StatelessWidget {
           var listController = ScrollController();
           store.state.systemState.listController = listController;
         },
+        onDispose: (store){
+          store.state.systemState.listController.dispose();
+        },
         converter: SystemViewModule.fromStore,
         builder: (context, vm) {
           return Scaffold(

@@ -45,6 +45,10 @@ class NetPath {
     return '/lg/uncollect_originId/$id/json';
   }
 
+  static String cancelCollect(int id) {
+    return '/lg/uncollect/$id/json';
+  }
+
   static String getTodoLists(int index) {
     return '/lg/todo/v2/list/$index/json';
   }
@@ -91,5 +95,9 @@ class NetPath {
 
   static String getUserIntegralPrivate(int userId, int index) {
     return '/coin/list/$userId/$index/json';
+  }
+
+  static String getCollectArticle(int index) {
+    return '/lg/collect/list/$index/json';
   }
 }

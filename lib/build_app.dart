@@ -12,6 +12,8 @@ import 'package:flutterwanandroid/custom_page_route/slide_route.dart';
 import 'package:flutterwanandroid/style/app_theme.dart';
 import 'package:flutterwanandroid/ui/author/auther_page.dart';
 import 'package:flutterwanandroid/ui/author/redux/author_state.dart';
+import 'package:flutterwanandroid/ui/collect/collect_article/collect_article_screen.dart';
+import 'package:flutterwanandroid/ui/collect/collect_article/reducer/collect_article_state.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/home_page.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
@@ -87,6 +89,8 @@ Future<Widget> buildAppWidget() async {
               return SlideRightRoute<void>(page: SystemPage());
             case AppRouter.wenda:
               return SlideRightRoute<void>(page: WendaScreen());
+            case AppRouter.collectArticle:
+              return SlideRightRoute<void>(page: CollectArticleScreen());
             case AppRouter.integralRank:
               return SlideRightRoute<void>(page: IntegralRankScreen());
             case AppRouter.integralPrivate:
@@ -144,6 +148,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       wendaState: WendaState(),
       integralRankState: IntegralRankState(),
       integralPrivateState: IntegralPrivateState(),
+      collectArticleState: CollectArticleState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

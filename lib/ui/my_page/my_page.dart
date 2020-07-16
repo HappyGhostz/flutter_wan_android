@@ -46,6 +46,18 @@ class MyPage extends StatelessWidget {
                   vm.pushPage(context, AppRouter.wenda);
                 }),
               ),
+              _buildDivider(height: 16),
+              SliverToBoxAdapter(
+                child: _buildRowItem(context, itemIcon: Icons.crop_square, title: '广场'),
+              ),
+              _buildDivider(height: 1),
+              SliverToBoxAdapter(
+                child: _buildRowItem(context, itemIcon: Icons.share, title: '分享文章列表'),
+              ),
+              _buildDivider(height: 1),
+              SliverToBoxAdapter(
+                child: _buildRowItem(context, itemIcon: Icons.language, title: '常用网站'),
+              ),
               _buildDivider(title: '积分', padding: EdgeInsets.only(top: 4, right: 4, left: 8, bottom: 4)),
               SliverToBoxAdapter(
                 child: _buildRowItem(context, itemIcon: Icons.assessment, title: '积分排行榜', onTap: () {
@@ -55,12 +67,14 @@ class MyPage extends StatelessWidget {
               _buildDivider(height: 1),
               SliverToBoxAdapter(
                 child: _buildRowItem(context, itemIcon: Icons.person_add, title: '个人积分获取', onTap: () {
-                  vm.pushIntegralPrivatePage(context, AppRouter.integralPrivate);
+                  vm.pushAfterLoginPage(context, AppRouter.integralPrivate);
                 }),
               ),
               _buildDivider(title: '收藏', padding: EdgeInsets.only(top: 4, right: 4, left: 8, bottom: 4)),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.collections_bookmark, title: '收藏文章列表'),
+                child: _buildRowItem(context, itemIcon: Icons.collections_bookmark, title: '收藏文章列表', onTap: () {
+                  vm.pushAfterLoginPage(context, AppRouter.collectArticle);
+                }),
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(
@@ -73,18 +87,6 @@ class MyPage extends StatelessWidget {
               _buildDivider(height: 1),
               SliverToBoxAdapter(
                 child: _buildRowItem(context, itemIcon: Icons.public, title: '收藏网址'),
-              ),
-              _buildDivider(height: 16),
-              SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.crop_square, title: '广场'),
-              ),
-              _buildDivider(height: 1),
-              SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.share, title: '分享文章列表'),
-              ),
-              _buildDivider(height: 1),
-              SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.language, title: '常用网站'),
               ),
               SliverToBoxAdapter(
                 child: _buildLogoutWidget(vm, context),

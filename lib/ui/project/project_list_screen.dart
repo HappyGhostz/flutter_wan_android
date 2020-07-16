@@ -138,6 +138,12 @@ class ProjectListScreenState extends State<ProjectListScreen> {
   }
 
   @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PageLoadWidget(
       dataLoadStatus: projectLoadStatus,

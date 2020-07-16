@@ -139,6 +139,12 @@ class _PublicAccountHistoryListScreenState extends State<PublicAccountHistoryLis
   }
 
   @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PageLoadWidget(
       dataLoadStatus: publicAccountHistoryStatus,

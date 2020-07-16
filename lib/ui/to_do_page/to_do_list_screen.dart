@@ -184,6 +184,12 @@ class _TodoListScreenState extends State<TodoListScreen> {
   }
 
   @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomPageLoadWidget(
       dataLoadStatus: currentStatus,

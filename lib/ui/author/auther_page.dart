@@ -36,6 +36,9 @@ class AuthorPage extends StatelessWidget {
           });
           store.dispatch(loadInitAuthorDataAction(0, author));
         },
+        onDispose: (store) {
+          store.state.authorState.scrollController.dispose();
+        },
         converter: AuthorViewModule.fromStore,
         builder: (context, vm) {
           return Scaffold(

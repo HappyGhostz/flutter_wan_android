@@ -31,6 +31,9 @@ class WendaScreen extends StatelessWidget {
           });
           store.dispatch(loadWendaListDataAction(1));
         },
+        onDispose: (store) {
+          store.state.wendaState.scrollController.dispose();
+        },
         converter: WendaViewModule.fromStore,
         builder: (context, vm) {
           return Scaffold(

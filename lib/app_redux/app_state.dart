@@ -6,6 +6,7 @@ import 'package:flutterwanandroid/app_redux/app_dependencies.dart';
 import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/type/clone.dart';
 import 'package:flutterwanandroid/ui/author/redux/author_state.dart';
+import 'package:flutterwanandroid/ui/collect/collect_article/reducer/collect_article_state.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
 import 'package:flutterwanandroid/ui/integral/integra_private/reducer/integral_private_state.dart';
@@ -50,6 +51,7 @@ class AppState implements Cloneable<AppState> {
     this.wendaState,
     this.integralRankState,
     this.integralPrivateState,
+    this.collectArticleState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -87,6 +89,7 @@ class AppState implements Cloneable<AppState> {
   WendaState wendaState;
   IntegralRankState integralRankState;
   IntegralPrivateState integralPrivateState;
+  CollectArticleState collectArticleState;
 
   @override
   AppState clone() {
@@ -117,6 +120,7 @@ class AppState implements Cloneable<AppState> {
       ..systemListState = systemListState
       ..wendaState = wendaState
       ..integralRankState = integralRankState
-      ..integralPrivateState = integralPrivateState;
+      ..integralPrivateState = integralPrivateState
+      ..collectArticleState = collectArticleState;
   }
 }
