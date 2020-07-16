@@ -56,7 +56,9 @@ class MyPage extends StatelessWidget {
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.language, title: '常用网站'),
+                child: _buildRowItem(context, itemIcon: Icons.language, title: '常用网站', onTap: () {
+                  vm.pushPage(context, AppRouter.commonlyUsedWebSites);
+                }),
               ),
               _buildDivider(title: '积分', padding: EdgeInsets.only(top: 4, right: 4, left: 8, bottom: 4)),
               SliverToBoxAdapter(

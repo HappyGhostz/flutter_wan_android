@@ -19,6 +19,7 @@ class NetPath {
   static const UPDATE_COLLECT_WEB = '/lg/collect/updatetool/json';
   static const ADD_COLLECT_WEB = '/lg/collect/addtool/json';
   static const ADD_COLLECT_ARTICLE = '/lg/collect/add/json';
+  static const COMMONLY_USED_WEBSITES = '/friend/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';

@@ -16,6 +16,8 @@ import 'package:flutterwanandroid/ui/collect/collect_article/collect_article_scr
 import 'package:flutterwanandroid/ui/collect/collect_article/reducer/collect_article_state.dart';
 import 'package:flutterwanandroid/ui/collect/collect_web/collect_web_screen.dart';
 import 'package:flutterwanandroid/ui/collect/collect_web/reducer/collect_web_state.dart';
+import 'package:flutterwanandroid/ui/commonly_used_websites/commonly_websites_screen.dart';
+import 'package:flutterwanandroid/ui/commonly_used_websites/reducer/commonly_websites_state.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/home_page.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
@@ -93,6 +95,8 @@ Future<Widget> buildAppWidget() async {
               return SlideRightRoute<void>(page: CollectWebScreen());
             case AppRouter.wenda:
               return SlideRightRoute<void>(page: WendaScreen());
+            case AppRouter.commonlyUsedWebSites:
+              return SlideRightRoute<void>(page: CommonlyUsedWebSitesScreen());
             case AppRouter.collectArticle:
               return SlideRightRoute<void>(page: CollectArticleScreen());
             case AppRouter.integralRank:
@@ -154,6 +158,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       integralPrivateState: IntegralPrivateState(),
       collectArticleState: CollectArticleState(),
       collectWebState: CollectWebState(),
+      commonlyUsedWebSitesState: CommonlyUsedWebSitesState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

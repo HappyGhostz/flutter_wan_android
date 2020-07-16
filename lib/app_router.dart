@@ -13,4 +13,5 @@ class AppRouter {
   static const String integralPrivate = '/integralPrivate';
   static const String collectArticle = '/collectArticle';
   static const String collectWeb = '/collectWeb';
+  static const String commonlyUsedWebSites = '/commonlyUsedWebSites';
 }

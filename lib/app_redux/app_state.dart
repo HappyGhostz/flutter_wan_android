@@ -8,6 +8,7 @@ import 'package:flutterwanandroid/type/clone.dart';
 import 'package:flutterwanandroid/ui/author/redux/author_state.dart';
 import 'package:flutterwanandroid/ui/collect/collect_article/reducer/collect_article_state.dart';
 import 'package:flutterwanandroid/ui/collect/collect_web/reducer/collect_web_state.dart';
+import 'package:flutterwanandroid/ui/commonly_used_websites/reducer/commonly_websites_state.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
 import 'package:flutterwanandroid/ui/integral/integra_private/reducer/integral_private_state.dart';
@@ -54,6 +55,7 @@ class AppState implements Cloneable<AppState> {
     this.integralPrivateState,
     this.collectArticleState,
     this.collectWebState,
+    this.commonlyUsedWebSitesState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -93,6 +95,7 @@ class AppState implements Cloneable<AppState> {
   IntegralPrivateState integralPrivateState;
   CollectArticleState collectArticleState;
   CollectWebState collectWebState;
+  CommonlyUsedWebSitesState commonlyUsedWebSitesState;
 
   @override
   AppState clone() {
@@ -125,6 +128,7 @@ class AppState implements Cloneable<AppState> {
       ..integralRankState = integralRankState
       ..integralPrivateState = integralPrivateState
       ..collectArticleState = collectArticleState
-      ..collectWebState = collectWebState;
+      ..collectWebState = collectWebState
+      ..commonlyUsedWebSitesState = commonlyUsedWebSitesState;
   }
 }
