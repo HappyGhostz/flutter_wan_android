@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterwanandroid/custom_widget/dialog/collect_edit_dialog.dart';
 import 'package:flutterwanandroid/custom_widget/dialog/dialog.dart';
 import 'package:flutterwanandroid/custom_widget/dialog/edit_dialog.dart';
 import 'package:flutterwanandroid/custom_widget/dialog/error_dialog.dart';
@@ -63,6 +64,27 @@ Future<Map<String, String>> showEditDialog(
         editItemTitle: editItemTitle,
         content: content,
         dateTime: dateTime,
+      ));
+  if (params.isNotEmpty) {
+    return params[0];
+  }
+  return <String, String>{};
+}
+
+Future<Map<String, String>> showCollectEditDialog(
+  BuildContext context, {
+  String title,
+  String editItemTitle,
+  String content,
+  String author,
+}) async {
+  var params = await showAppDialog<List<Map<String, String>>>(
+      context: context,
+      child: CollectEditDialog(
+        title: title,
+        editInfo: editItemTitle,
+        content: content,
+        author: author,
       ));
   if (params.isNotEmpty) {
     return params[0];

@@ -24,7 +24,7 @@ Flushbar _buildFlushBar(String toastMessage, FlushbarPosition position, Color co
   return Flushbar(
     messageText: Text(
       toastMessage,
-      style: AppTextStyle.caption(color: AppColors.black),
+      style: AppTextStyle.caption(color: AppColors.white),
     ),
     borderRadius: 4,
     aroundPadding: const EdgeInsets.all(16),

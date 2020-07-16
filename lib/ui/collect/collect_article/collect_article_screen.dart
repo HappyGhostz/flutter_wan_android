@@ -32,10 +32,13 @@ class CollectArticleScreen extends StatelessWidget {
           store.dispatch(loadCollectArticleListDataAction(0));
         },
         onDispose: (store) async {
-          await store.state.appDependency.sharedPreferences.setBool(isFirstEnterCollectArticleKey, true);
-          store.state.collectArticleState.scrollController.dispose();
+          var isFirstEnterCollectArticle = await store.state.appDependency.sharedPreferences.getBool(isFirstEnterCollectArticleKey);
+          if (isFirstEnterCollectArticle == null || !isFirstEnterCollectArticle) {
+            await store.state.appDependency.sharedPreferences.setBool(isFirstEnterCollectArticleKey, true);
+          }
+          store.state.collectArticleState.scrollController?.dispose();
         },
-        onDidChange: (vm) {
+        onInitialBuild: (vm) {
           vm.showPromptInfo(context);
         },
         converter: CollectArticleViewModule.fromStore,
@@ -85,20 +88,27 @@ class CollectArticleScreen extends StatelessWidget {
     return Dismissible(
         key: Key('key${collectArticle.id}'),
         background: Container(
-          color: Colors.red,
-          child: ListTile(
-            leading: Center(
-              child: Icon(
+          color: AppColors.warning,
+          child: Row(
+            children: <Widget>[
+              Icon(
                 Icons.delete,
-                color: Colors.white,
+                color: AppColors.white,
               ),
-            ),
-            trailing: Center(
-              child: Icon(
+              Text(
+                '删除',
+                style: AppTextStyle.caption(color: AppColors.white),
+              ),
+              Spacer(),
+              Text(
+                '删除',
+                style: AppTextStyle.caption(color: AppColors.white),
+              ),
+              Icon(
                 Icons.delete,
-                color: Colors.white,
+                color: AppColors.white,
               ),
-            ),
+            ],
           ),
         ),
         onDismissed: (direction) {

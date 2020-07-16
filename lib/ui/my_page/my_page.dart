@@ -82,7 +82,9 @@ class MyPage extends StatelessWidget {
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.computer, title: '收藏网站列表'),
+                child: _buildRowItem(context, itemIcon: Icons.computer, title: '收藏网站列表', onTap: () {
+                  vm.pushAfterLoginPage(context, AppRouter.collectWeb);
+                }),
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(

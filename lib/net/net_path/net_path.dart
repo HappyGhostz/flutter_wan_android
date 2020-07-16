@@ -14,6 +14,10 @@ class NetPath {
   static const HOT_KEY = '//hotkey/json';
   static const PROJECT_TAB = '/project/tree/json';
   static const SYSTEM_TREE = '/tree/json';
+  static const COLLECT_WEB = '/lg/collect/usertools/json';
+  static const CANCEL_COLLECT_WEB = '/lg/collect/deletetool/json';
+  static const UPDATE_COLLECT_WEB = '/lg/collect/updatetool/json';
+  static const ADD_COLLECT_WEB = '/lg/collect/addtool/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';
