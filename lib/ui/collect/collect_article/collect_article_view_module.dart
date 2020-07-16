@@ -31,6 +31,7 @@ class CollectArticleViewModule {
   Function(BuildContext context, CollectArticle collectArticle) cancelCollect;
   bool isPerformingRequest;
   List<CollectArticle> collectArticles;
+  Function(BuildContext context, Map<String, String> params) addCollectArticle;
 
   static CollectArticleViewModule fromStore(Store<AppState> store) {
     var state = store.state.collectArticleState;
@@ -58,6 +59,9 @@ class CollectArticleViewModule {
         if (isFirstEnterCollectArticle == null || !isFirstEnterCollectArticle) {
           await showSuccessFlushBarMessage('左右滑动，取消收藏哦！', context, position: FlushbarPosition.BOTTOM);
         }
+      }
+      ..addCollectArticle = (context, params) {
+        store.dispatch(addCollectArticleAction(context, params));
       };
   }
 }

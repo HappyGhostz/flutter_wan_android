@@ -18,6 +18,7 @@ class NetPath {
   static const CANCEL_COLLECT_WEB = '/lg/collect/deletetool/json';
   static const UPDATE_COLLECT_WEB = '/lg/collect/updatetool/json';
   static const ADD_COLLECT_WEB = '/lg/collect/addtool/json';
+  static const ADD_COLLECT_ARTICLE = '/lg/collect/add/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';

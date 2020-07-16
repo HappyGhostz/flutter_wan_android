@@ -10,6 +10,7 @@ import 'package:flutterwanandroid/style/app_text_style.dart';
 import 'package:flutterwanandroid/ui/collect/collect_article/collect_article_view_module.dart';
 import 'package:flutterwanandroid/ui/collect/collect_article/reducer/collect_article_action.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
+import 'package:flutterwanandroid/utils/dialog_manager.dart';
 import 'package:flutterwanandroid/utils/router_utils.dart';
 
 class CollectArticleScreen extends StatelessWidget {
@@ -46,6 +47,9 @@ class CollectArticleScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text('收藏文章列表'),
+              actions: <Widget>[
+                _buildAddCollectArticle(context, vm),
+              ],
             ),
             body: PageLoadWidget(
               dataLoadStatus: vm.dataLoadStatus,
@@ -236,6 +240,23 @@ class CollectArticleScreen extends StatelessWidget {
           )),
         ],
       ),
+    );
+  }
+
+  Widget _buildAddCollectArticle(BuildContext context, CollectArticleViewModule vm) {
+    return Container(
+      child: IconButton(
+          icon: Icon(
+            Icons.add,
+            color: AppColors.white,
+          ),
+          onPressed: () async {
+            var params = await showCollectEditDialog(context, title: '请输入标题', editItemTitle: '新增收藏', content: '请输入链接地址', author: '请输入作者');
+            if (params.isEmpty) {
+              return;
+            }
+            vm.addCollectArticle(context, params);
+          }),
     );
   }
 }

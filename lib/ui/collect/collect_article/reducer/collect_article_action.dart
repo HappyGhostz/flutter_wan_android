@@ -148,3 +148,32 @@ ThunkAction<AppState> cancelCollectAction(BuildContext context, CollectArticle c
     }
   };
 }
+
+ThunkAction<AppState> addCollectArticleAction(BuildContext context, Map<String, String> params) {
+  showLoadingDialog<void>(context);
+  return (Store<AppState> store) async {
+    var formData = FormData.fromMap(<String, dynamic>{
+      'title': params[editTitleKey],
+      'link': params[editContentKey],
+      'author': params[editTimeKey],
+    });
+    try {
+      var updateResponse = await store.state.dio.post<Map<String, dynamic>>(NetPath.ADD_COLLECT_ARTICLE, data: formData);
+      dismissDialog<void>(context);
+      var errorCode = updateResponse.data['errorCode'] as int;
+      var errorMsg = updateResponse.data['errorMsg'] as String;
+      if (errorCode == 0) {
+        store.dispatch(UpdateCollectArticleListDataStatusAction(dataLoadStatus: DataLoadStatus.loading));
+        store.dispatch(loadCollectArticleListDataAction(0));
+      } else {
+        store.dispatch(HttpAction(error: errorMsg, context: context));
+      }
+    } on DioError catch (e) {
+      dismissDialog<void>(context);
+      store.dispatch(HttpAction(dioError: e, context: context));
+    } catch (e) {
+      dismissDialog<void>(context);
+      store.dispatch(HttpAction(error: e.toString(), context: context));
+    }
+  };
+}

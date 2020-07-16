@@ -187,6 +187,7 @@ class _CollectEditDialogState extends State<CollectEditDialog> {
     if (widget.author == null) {
       return Container();
     }
+    authorController.text = widget.author;
     return Padding(
       padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 8),
       child: Padding(

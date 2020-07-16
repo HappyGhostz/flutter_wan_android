@@ -72,23 +72,15 @@ class MyPage extends StatelessWidget {
               ),
               _buildDivider(title: '收藏', padding: EdgeInsets.only(top: 4, right: 4, left: 8, bottom: 4)),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.collections_bookmark, title: '收藏文章列表', onTap: () {
+                child: _buildRowItem(context, itemIcon: Icons.collections, title: '收藏文章列表', onTap: () {
                   vm.pushAfterLoginPage(context, AppRouter.collectArticle);
                 }),
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.collections, title: '收藏文章'),
-              ),
-              _buildDivider(height: 1),
-              SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.computer, title: '收藏网站列表', onTap: () {
+                child: _buildRowItem(context, itemIcon: Icons.public, title: '收藏网站列表', onTap: () {
                   vm.pushAfterLoginPage(context, AppRouter.collectWeb);
                 }),
-              ),
-              _buildDivider(height: 1),
-              SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.public, title: '收藏网址'),
               ),
               SliverToBoxAdapter(
                 child: _buildLogoutWidget(vm, context),

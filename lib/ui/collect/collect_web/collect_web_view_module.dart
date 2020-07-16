@@ -18,6 +18,7 @@ class CollectWebViewModule {
     this.showPromptInfo,
     this.collectWebs,
     this.editCollectWeb,
+    this.addCollectWeb,
   });
   DataLoadStatus dataLoadStatus;
   Function() refreshData;
