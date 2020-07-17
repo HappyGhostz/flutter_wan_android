@@ -106,4 +106,8 @@ class NetPath {
   static String getCollectArticle(int index) {
     return '/lg/collect/list/$index/json';
   }
+
+  static String getShareOtherArticle(int id, int index) {
+    return '/user/$id/share_articles/$index/json';
+  }
 }

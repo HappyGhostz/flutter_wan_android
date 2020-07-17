@@ -4,6 +4,7 @@ class AppRouter {
   static const String homeRouterName = '/home';
   static const String webRouterName = '/web';
   static const String authorArticleRouterName = '/authorArticle';
+  static const String shareOtherArticle = '/shareOtherArticle';
   static const String search = '/search';
   static const String project = '/project';
   static const String system = '/system';

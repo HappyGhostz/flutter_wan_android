@@ -17,6 +17,7 @@ import 'package:flutterwanandroid/ui/project/reducer/project_reducer.dart';
 import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_reducer.dart';
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_reducer.dart';
 import 'package:flutterwanandroid/ui/search/redux/search_reducer.dart';
+import 'package:flutterwanandroid/ui/share/share_other/reducer/share_other_reducer.dart';
 import 'package:flutterwanandroid/ui/splash/splash_reducer.dart';
 import 'package:flutterwanandroid/ui/system/reducer/system_reducer.dart';
 import 'package:flutterwanandroid/ui/system/system_list/reducer/system_list_reducer.dart';
@@ -65,5 +66,6 @@ AppState appReducer(AppState state, dynamic action) {
     ..integralPrivateState = integralPrivateReducer(state.integralPrivateState, action)
     ..collectArticleState = collectArticleReducer(state.collectArticleState, action)
     ..collectWebState = collectWebReducer(state.collectWebState, action)
-    ..commonlyUsedWebSitesState = commonlyWebSitesReducer(state.commonlyUsedWebSitesState, action);
+    ..commonlyUsedWebSitesState = commonlyWebSitesReducer(state.commonlyUsedWebSitesState, action)
+    ..shareOtherState = shareOtherReducer(state.shareOtherState, action);
 }
