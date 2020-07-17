@@ -119,4 +119,8 @@ class NetPath {
   static String deletedSharePrivateArticle(int id) {
     return '/lg/user_article/delete/$id/json';
   }
+
+  static String getCommunityArticle(int index) {
+    return '/user_article/list/$index/json';
+  }
 }

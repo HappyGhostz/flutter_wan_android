@@ -18,6 +18,8 @@ import 'package:flutterwanandroid/ui/collect/collect_web/collect_web_screen.dart
 import 'package:flutterwanandroid/ui/collect/collect_web/reducer/collect_web_state.dart';
 import 'package:flutterwanandroid/ui/commonly_used_websites/commonly_websites_screen.dart';
 import 'package:flutterwanandroid/ui/commonly_used_websites/reducer/commonly_websites_state.dart';
+import 'package:flutterwanandroid/ui/community/community_screen.dart';
+import 'package:flutterwanandroid/ui/community/reducer/community_state.dart';
 import 'package:flutterwanandroid/ui/frist_page/redux/first_page_state.dart';
 import 'package:flutterwanandroid/ui/home/home_page.dart';
 import 'package:flutterwanandroid/ui/home/redux/home_state.dart';
@@ -114,6 +116,8 @@ Future<Widget> buildAppWidget() async {
               return SlideRightRoute<void>(page: CollectArticleScreen());
             case AppRouter.integralRank:
               return SlideRightRoute<void>(page: IntegralRankScreen());
+            case AppRouter.communityArticle:
+              return SlideRightRoute<void>(page: CommunityScreen());
             case AppRouter.integralPrivate:
               var params = routeSettings.arguments as Map<String, dynamic>;
               int userId;
@@ -174,6 +178,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       commonlyUsedWebSitesState: CommonlyUsedWebSitesState(),
       shareOtherState: ShareOtherState(),
       sharePrivateState: SharePrivateState(),
+      communityState: CommunityState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),
