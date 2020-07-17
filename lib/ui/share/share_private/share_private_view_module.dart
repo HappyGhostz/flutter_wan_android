@@ -18,6 +18,11 @@ class SharePrivateViewModule {
     this.scrollController,
     this.isPerformingRequest,
     this.shareOtherData,
+    this.refreshData,
+    this.showPromptInfo,
+    this.pushWebPage,
+    this.deletedShareArticle,
+    this.addShareArticle,
   });
 
   DataLoadStatus dataLoadStatus;

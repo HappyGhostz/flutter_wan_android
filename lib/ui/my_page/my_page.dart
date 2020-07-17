@@ -48,7 +48,9 @@ class MyPage extends StatelessWidget {
               ),
               _buildDivider(height: 16),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.crop_square, title: '广场'),
+                child: _buildRowItem(context, itemIcon: Icons.crop_square, title: '广场', onTap: () {
+                  vm.pushPage(context, AppRouter.communityArticle);
+                }),
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(
