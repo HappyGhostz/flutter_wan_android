@@ -21,6 +21,7 @@ import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/search/redux/search_state.dart';
 import 'package:flutterwanandroid/ui/share/share_other/reducer/share_other_state.dart';
+import 'package:flutterwanandroid/ui/share/share_private/reducer/share_private_state.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
 import 'package:flutterwanandroid/ui/system/reducer/system_state.dart';
 import 'package:flutterwanandroid/ui/system/system_list/reducer/system_list_state.dart';
@@ -58,6 +59,7 @@ class AppState implements Cloneable<AppState> {
     this.collectWebState,
     this.commonlyUsedWebSitesState,
     this.shareOtherState,
+    this.sharePrivateState,
   }) {
     var options = BaseOptions(
       baseUrl: NetPath.APP_BASE_URL,
@@ -99,6 +101,7 @@ class AppState implements Cloneable<AppState> {
   CollectWebState collectWebState;
   CommonlyUsedWebSitesState commonlyUsedWebSitesState;
   ShareOtherState shareOtherState;
+  SharePrivateState sharePrivateState;
 
   @override
   AppState clone() {
@@ -133,6 +136,7 @@ class AppState implements Cloneable<AppState> {
       ..collectArticleState = collectArticleState
       ..collectWebState = collectWebState
       ..commonlyUsedWebSitesState = commonlyUsedWebSitesState
-      ..shareOtherState = shareOtherState;
+      ..shareOtherState = shareOtherState
+      ..sharePrivateState = sharePrivateState;
   }
 }

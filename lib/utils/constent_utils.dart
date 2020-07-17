@@ -18,6 +18,7 @@ String systemListTitleKey = 'systemListTitleKey';
 String integralPrivateId = 'integralPrivateId';
 String isFirstEnterCollectArticleKey = 'isFirstEnterCollectArticleKey';
 String isFirstEnterCollectWebKey = 'isFirstEnterCollectWebKey';
+String isFirstEnterSharePrivateKey = 'isFirstEnterSharePrivateKey';
 
 var dioErrorValue = <DioErrorType, String>{
   DioErrorType.CANCEL: '网络请求被取消!',
