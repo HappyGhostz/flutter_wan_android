@@ -52,7 +52,9 @@ class MyPage extends StatelessWidget {
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(
-                child: _buildRowItem(context, itemIcon: Icons.share, title: '分享文章列表'),
+                child: _buildRowItem(context, itemIcon: Icons.share, title: '分享文章列表', onTap: () {
+                  vm.pushAfterLoginPage(context, AppRouter.shareArticle);
+                }),
               ),
               _buildDivider(height: 1),
               SliverToBoxAdapter(

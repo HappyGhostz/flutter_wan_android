@@ -423,6 +423,8 @@ class AppBassTextField extends StatelessWidget {
                   helperText: helperText,
                   helperStyle: helperTextStyle ?? AppTextStyle.caption(color: AppColors.greyLightMild),
                   counter: errorText == null ? null : _buildErrorCounter(errorText, errorTextStyle),
+                  disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0), borderSide: BorderSide(color: AppColors.greyAc, width: 1.0)),
                 ) ??
                 InputDecoration(
                   errorText: errorText,

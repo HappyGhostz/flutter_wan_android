@@ -20,6 +20,7 @@ class NetPath {
   static const ADD_COLLECT_WEB = '/lg/collect/addtool/json';
   static const ADD_COLLECT_ARTICLE = '/lg/collect/add/json';
   static const COMMONLY_USED_WEBSITES = '/friend/json';
+  static const SHARE_ARTICLE = '/lg/user_article/add/json';
 
   static String getFirstArticle(int index) {
     return '/article/list/$index/json';
@@ -109,5 +110,13 @@ class NetPath {
 
   static String getShareOtherArticle(int id, int index) {
     return '/user/$id/share_articles/$index/json';
+  }
+
+  static String getSharePrivateArticle(int index) {
+    return '/user/lg/private_articles/$index/json';
+  }
+
+  static String deletedSharePrivateArticle(int id) {
+    return '/lg/user_article/delete/$id/json';
   }
 }

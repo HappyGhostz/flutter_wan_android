@@ -37,6 +37,8 @@ import 'package:flutterwanandroid/ui/search/redux/search_state.dart';
 import 'package:flutterwanandroid/ui/search/search_page.dart';
 import 'package:flutterwanandroid/ui/share/share_other/reducer/share_other_state.dart';
 import 'package:flutterwanandroid/ui/share/share_other/share_other_screen.dart';
+import 'package:flutterwanandroid/ui/share/share_private/reducer/share_private_state.dart';
+import 'package:flutterwanandroid/ui/share/share_private/share_private_screen.dart';
 import 'package:flutterwanandroid/ui/splash/splash_page.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
 import 'package:flutterwanandroid/ui/system/reducer/system_state.dart';
@@ -102,6 +104,8 @@ Future<Widget> buildAppWidget() async {
               return SlideRightRoute<void>(page: SystemPage());
             case AppRouter.collectWeb:
               return SlideRightRoute<void>(page: CollectWebScreen());
+            case AppRouter.shareArticle:
+              return SlideRightRoute<void>(page: SharePrivateScreen());
             case AppRouter.wenda:
               return SlideRightRoute<void>(page: WendaScreen());
             case AppRouter.commonlyUsedWebSites:
@@ -169,6 +173,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       collectWebState: CollectWebState(),
       commonlyUsedWebSitesState: CommonlyUsedWebSitesState(),
       shareOtherState: ShareOtherState(),
+      sharePrivateState: SharePrivateState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

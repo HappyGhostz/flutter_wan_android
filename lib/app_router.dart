@@ -15,4 +15,5 @@ class AppRouter {
   static const String collectArticle = '/collectArticle';
   static const String collectWeb = '/collectWeb';
   static const String commonlyUsedWebSites = '/commonlyUsedWebSites';
+  static const String shareArticle = '/shareArticle';
 }
