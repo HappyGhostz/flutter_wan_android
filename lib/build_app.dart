@@ -35,6 +35,8 @@ import 'package:flutterwanandroid/ui/public_account/history_lists/redux/history_
 import 'package:flutterwanandroid/ui/public_account/redux/public_account_state.dart';
 import 'package:flutterwanandroid/ui/search/redux/search_state.dart';
 import 'package:flutterwanandroid/ui/search/search_page.dart';
+import 'package:flutterwanandroid/ui/share/share_other/reducer/share_other_state.dart';
+import 'package:flutterwanandroid/ui/share/share_other/share_other_screen.dart';
 import 'package:flutterwanandroid/ui/splash/splash_page.dart';
 import 'package:flutterwanandroid/ui/splash/splash_state.dart';
 import 'package:flutterwanandroid/ui/system/reducer/system_state.dart';
@@ -86,6 +88,13 @@ Future<Widget> buildAppWidget() async {
               return SlideRightRoute<void>(
                   page: AuthorPage(
                 author: params[authorKey] as String,
+              ));
+            case AppRouter.shareOtherArticle:
+              var params = routeSettings.arguments as Map<String, dynamic>;
+              return SlideRightRoute<void>(
+                  page: ShareOtherScreen(
+                shareOtherName: params[shareUserNameKey] as String,
+                userId: params[shareUserIdKey] as int,
               ));
             case AppRouter.project:
               return SlideRightRoute<void>(page: ProjectPage());
@@ -159,6 +168,7 @@ Future<Store<AppState>> buildAppStore(GlobalKey<NavigatorState> navigatorKey) as
       collectArticleState: CollectArticleState(),
       collectWebState: CollectWebState(),
       commonlyUsedWebSitesState: CommonlyUsedWebSitesState(),
+      shareOtherState: ShareOtherState(),
       navigatorKey: navigatorKey,
       cookJar: cookJar,
       appDependency: AppDependency(sharedPreferences: sharedPerences),

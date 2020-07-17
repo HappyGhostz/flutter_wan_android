@@ -121,7 +121,7 @@ class FirstPage extends StatelessWidget {
                             )
                           : Container(),
                       _buildTagsView(topArticleData.tags, vm),
-                      _buildAuthorOrShareUser(topArticleData.author, topArticleData.shareUser, vm, context),
+                      _buildAuthorOrShareUser(topArticleData.author, topArticleData.shareUser, vm, context, topArticleData.userId),
                       _buildArticleType(topArticleData.superChapterName, topArticleData.chapterName),
                     ],
                   ),
@@ -169,7 +169,7 @@ class FirstPage extends StatelessWidget {
                           )
                         : Container(),
                     _buildTagsView(article.tags, vm),
-                    _buildAuthorOrShareUser(article.author, article.shareUser, vm, context),
+                    _buildAuthorOrShareUser(article.author, article.shareUser, vm, context, article.userId),
                     _buildArticleType(article.superChapterName, article.chapterName),
                   ],
                 ),
@@ -307,10 +307,10 @@ class FirstPage extends StatelessWidget {
     return tagRow;
   }
 
-  Widget _buildAuthorOrShareUser(String author, String shareUser, FirstPageViewModule vm, BuildContext context) {
+  Widget _buildAuthorOrShareUser(String author, String shareUser, FirstPageViewModule vm, BuildContext context, int userId) {
     var name = '';
     var title = '';
-    if (author.isNotEmpty) {
+    if (author == null || author.isNotEmpty) {
       name = author;
       title = '作者';
     } else {
@@ -325,9 +325,14 @@ class FirstPage extends StatelessWidget {
 //        vm.changeNameColorForTapDown(AppColors.black);
       },
       onTap: () {
-        if (author.isNotEmpty) {
+        if (author != null && author.isNotEmpty) {
           RouterUtil.pushName(context, AppRouter.authorArticleRouterName, params: <String, dynamic>{
             authorKey: author,
+          });
+        } else if (shareUser != null && shareUser.isNotEmpty) {
+          RouterUtil.pushName(context, AppRouter.shareOtherArticle, params: <String, dynamic>{
+            shareUserIdKey: userId,
+            shareUserNameKey: shareUser,
           });
         }
       },

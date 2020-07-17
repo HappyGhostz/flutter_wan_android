@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterwanandroid/app_redux/app_action.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
+import 'package:flutterwanandroid/custom_widget/dialog/loading_dialog.dart';
 import 'package:flutterwanandroid/module/first_page/article.dart';
 import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/utils/constent_utils.dart';
@@ -58,6 +59,7 @@ ThunkAction<AppState> loadInitAuthorDataAction(int index, String author) {
 }
 
 ThunkAction<AppState> changeTheAuthorCollectStatusAction(BuildContext context, {bool collect, int indexCount}) {
+  showLoadingDialog<void>(context);
   return (Store<AppState> store) async {
     try {
       var id = store.state.authorState.articleModule.data.datas[indexCount].id;
@@ -67,12 +69,15 @@ ThunkAction<AppState> changeTheAuthorCollectStatusAction(BuildContext context, {
       } else {
         response = await store.state.dio.post<Map<String, dynamic>>(NetPath.unCollectArticle(id));
       }
+      dismissDialog<void>(context);
       var collects = <int, bool>{};
       collects[indexCount] = collect;
       store.dispatch(HttpAction(context: context, response: response, action: UpdateAuthorCollectsDataAction(collects: collects)));
     } on DioError catch (e) {
+      dismissDialog<void>(context);
       store.dispatch(HttpAction(dioError: e, context: context));
     } catch (e) {
+      dismissDialog<void>(context);
       store.dispatch(HttpAction(error: e.toString(), context: context));
     }
   };
