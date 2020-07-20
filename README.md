@@ -4,6 +4,8 @@ A new Flutter application.
 
 - 一款Flutter + redux为架构的[WanAndroid](https://www.wanandroid.com/blog/show/2)客户端
 
+[贴一张很形象的图](https://juejin.im/post/5ba26c086fb9a05ce57697da) ![](https://github.com/HappyGhostz/flutter_wan_android/raw/master/screen_shot/redux_example.png)
+
 ## ScreenShot
 
 - ![](https://github.com/HappyGhostz/flutter_wan_android/raw/master/screen_shot/wan_android_one.gif)
