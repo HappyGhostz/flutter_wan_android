@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutterwanandroid/app_redux/app_action.dart';
 import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/app_router.dart';
@@ -27,6 +26,7 @@ import 'package:flutterwanandroid/ui/to_do_page/redux/to_do_reducer.dart';
 import 'package:flutterwanandroid/ui/web/redux/web_reducer.dart';
 import 'package:flutterwanandroid/ui/wen_da/reducer/wen_da_reducer.dart';
 import 'package:flutterwanandroid/utils/dialog_manager.dart';
+import 'package:flutterwanandroid/utils/router_utils.dart';
 
 AppState appReducer(AppState state, dynamic action) {
   if (action is Function) return state;
@@ -44,7 +44,7 @@ AppState appReducer(AppState state, dynamic action) {
     showApiError(action.context, action.errorMessage);
     return state;
   } else if (action is VerificationFailedAction) {
-    Navigator.pushNamedAndRemoveUntil(action.context, AppRouter.loginRouterName, (route) => false);
+    RouterUtil.pushName(action.context, AppRouter.loginRouterName);
     return state;
   }
   return state.clone()

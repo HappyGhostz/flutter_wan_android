@@ -55,8 +55,8 @@ class SharePrivateViewModule {
         RouterUtil.pushName(context, AppRouter.webRouterName, params: params);
       }
       ..showPromptInfo = (context) async {
-        var isFirstEnterCollectArticle = await store.state.appDependency.sharedPreferences.getBool(isFirstEnterCollectArticleKey);
-        if (isFirstEnterCollectArticle == null || !isFirstEnterCollectArticle) {
+        var isFirstEnterSharePrivate = await store.state.appDependency.sharedPreferences.getBool(isFirstEnterSharePrivateKey);
+        if (isFirstEnterSharePrivate == null || !isFirstEnterSharePrivate) {
           await showSuccessFlushBarMessage('左右滑动，删除分享哦！', context, position: FlushbarPosition.BOTTOM);
         }
       }

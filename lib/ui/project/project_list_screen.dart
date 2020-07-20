@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:flutterwanandroid/app_redux/app_action.dart';
+import 'package:flutterwanandroid/app_redux/app_state.dart';
 import 'package:flutterwanandroid/app_router.dart';
 import 'package:flutterwanandroid/custom_widget/dialog/loading_dialog.dart';
 import 'package:flutterwanandroid/custom_widget/load_more.dart';
 import 'package:flutterwanandroid/custom_widget/page_show_widget.dart';
 import 'package:flutterwanandroid/module/project/project_list_module.dart';
+import 'package:flutterwanandroid/net/base_response_object.dart';
 import 'package:flutterwanandroid/net/net_path/net_path.dart';
 import 'package:flutterwanandroid/style/app_colors.dart';
 import 'package:flutterwanandroid/style/app_constent_padding.dart';
@@ -255,21 +259,27 @@ class ProjectListScreenState extends State<ProjectListScreen> {
     try {
       showLoadingDialog<dynamic>(context);
       var id = projectItem.id;
-      Response response;
+      Response<Map<String, dynamic>> response;
       if (collect) {
         response = await widget.dio.post<Map<String, dynamic>>(NetPath.collectArticle(id));
       } else {
         response = await widget.dio.post<Map<String, dynamic>>(NetPath.unCollectArticle(id));
       }
       dismissDialog<void>(context);
-      var collectsCopy = <int, bool>{};
-      collectsCopy[index] = collect;
-      if (collects == null) {
-        collects = collectsCopy;
+      var baseResponse = BaseResponse.fromJson(response.data);
+      if (baseResponse.errorCode == -1001) {
+        var store = StoreProvider.of<AppState>(context);
+        store.dispatch(VerificationFailedAction(context: context));
       } else {
-        collects.addAll(collectsCopy);
+        var collectsCopy = <int, bool>{};
+        collectsCopy[index] = collect;
+        if (collects == null) {
+          collects = collectsCopy;
+        } else {
+          collects.addAll(collectsCopy);
+        }
+        setState(() {});
       }
-      setState(() {});
     } on DioError catch (e) {
       dismissDialog<void>(context);
     } catch (e) {
