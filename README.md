@@ -6,12 +6,12 @@ A new Flutter application.
 
 ## ScreenShot
 
-- [one](https://github.com/HappyGhostz/flutter_wan_android/blob/master/screen_shot/wan_android_one.gif)
-- [two](https://github.com/HappyGhostz/flutter_wan_android/blob/master/screen_shot/wan_android_two.gif)
-- [three](https://github.com/HappyGhostz/flutter_wan_android/blob/master/screen_shot/wan_android_three.gif)
-- [four](https://github.com/HappyGhostz/flutter_wan_android/blob/master/screen_shot/wan_android_four.gif)
-- [five](https://github.com/HappyGhostz/flutter_wan_android/blob/master/screen_shot/wan_android_five.gif)
-- [six](https://github.com/HappyGhostz/flutter_wan_android/blob/master/screen_shot/wan_android_six.gif)
+- [one](https://github.com/HappyGhostz/flutter_wan_android/raw/master/screen_shot/wan_android_one.gif)
+- [two](https://github.com/HappyGhostz/flutter_wan_android/raw/master/screen_shot/wan_android_two.gif)
+- [three](https://github.com/HappyGhostz/flutter_wan_android/raw/master/screen_shot/wan_android_three.gif)
+- [four](https://github.com/HappyGhostz/flutter_wan_android/raw/master/screen_shot/wan_android_four.gif)
+- [five](https://github.com/HappyGhostz/flutter_wan_android/raw/master/screen_shot/wan_android_five.gif)
+- [six](https://github.com/HappyGhostz/flutter_wan_android/raw/master/screen_shot/wan_android_six.gif)
 
 ## Environment
 
