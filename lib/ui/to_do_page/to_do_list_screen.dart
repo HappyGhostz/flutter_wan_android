@@ -83,7 +83,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
       var toDoResponse = await widget.dio.get<Map<String, dynamic>>(NetPath.getTodoLists(1), queryParameters: params);
       var todoModule = TodoModule.fromJson(toDoResponse.data);
       if (todoModule.errorCode == -1001) {
-        RouterUtil.pushReplacementNamed(context, AppRouter.loginRouterName);
+        Navigator.of(context).pop();
+        RouterUtil.pushName(context, AppRouter.loginRouterName);
       } else if (todoModule.errorCode < 0) {
         setState(() {
           currentStatus = DataLoadStatus.failure;
